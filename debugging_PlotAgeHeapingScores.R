@@ -10,9 +10,9 @@ library(gridExtra)
 
 # ComputeRatioRatios()
 ## source function
-source("R/ComputeAgeHeapingScores.R")
-source("R/Helpers.R")
-source("R/PlotAgeHeapingScores.R")
+source("../SubnationalCRVS/R/ComputeAgeHeapingScores.R")
+source("../SubnationalCRVS/R/Helpers.R")
+source("../SubnationalCRVS/R/PlotAgeHeapingScores.R")
 
 ## specify arguments
 data <- ecuador_age_tabulation

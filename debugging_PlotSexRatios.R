@@ -12,8 +12,8 @@ library(reshape2)
 
 # ComputeRatioRatios()
 ## source function
-source("R/ComputeSexRatios.R")
-source("R/PlotSexRatios.R")
+source("../SubnationalCRVS/R/ComputeSexRatios.R")
+source("../SubnationalCRVS/R/PlotSexRatios.R")
 
 ## specify arguments
 data <- example_data_ecuador

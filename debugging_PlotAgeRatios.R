@@ -12,9 +12,9 @@ library(reshape2)
 
 # ComputeRatioRatios()
 ## source function
-source("R/ComputeAgeRatios.R")
-source("R/GetOneAgeRatio.R")
-source("R/PlotAgeRatios.R")
+source("../SubnationalCRVS/R/ComputeAgeRatios.R")
+source("../SubnationalCRVS/R/GetOneAgeRatio.R")
+source("../SubnationalCRVS/R/PlotAgeRatios.R")
 
 ## specify arguments
 data <- example_data_ecuador
@@ -56,7 +56,7 @@ PlotAgeRatios(data=example_data_ecuador,
               print.overall=FALSE,
               plots.dir="Plots/")
 
-PlotAgeRatios(data=example_data_rabat,
+p <- PlotAgeRatios(data=example_data_rabat,
               name.disaggregations="residence_type",
               name.males="m",
               name.females="f",

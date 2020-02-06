@@ -11,9 +11,9 @@ library(DemoTools)
 
 # ComputeRatioRatios()
 ## source function
-source("R/ComputeAgeRatios.R")
-source("R/GetOneAgeRatio.R")
-source("R/PlotPotentialAgeHeaping.R")
+source("../SubnationalCRVS/R/ComputeAgeRatios.R")
+source("../SubnationalCRVS/R/GetOneAgeRatio.R")
+source("../SubnationalCRVS/R/PlotPotentialAgeHeaping.R")
 
 ## specify arguments
 data <- ecuador_age_tabulation
