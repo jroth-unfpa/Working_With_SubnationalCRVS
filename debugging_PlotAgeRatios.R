@@ -41,7 +41,7 @@ fig.nrow.overall=2
 fig.ncol.overall=1
 
 ## testing
-PlotAgeRatios(data=example_data_ecuador,
+a <- PlotAgeRatios(data=example_data_ecuador,
               name.disaggregations="province",
               name.males="m",
               name.females="f",
@@ -56,7 +56,7 @@ PlotAgeRatios(data=example_data_ecuador,
               print.overall=FALSE,
               plots.dir="Plots/")
 
-p <- PlotAgeRatios(data=example_data_rabat,
+PlotAgeRatios(data=example_data_rabat,
               name.disaggregations="residence_type",
               name.males="m",
               name.females="f",

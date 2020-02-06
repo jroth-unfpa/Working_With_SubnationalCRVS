@@ -1,0 +1,147 @@
+---
+title: "SubnationalCRVS Demo"
+author: "Jeremy Roth"
+date: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+```
+
+# load data
+```{r, "load_data"}
+load("../SubnationalCRVS/src/ecuador_age_tabulation.rda")
+load("../SubnationalCRVS/src/example_data_ecuador.rda")
+```
+
+# load package
+```{r, "load_package"}
+library(SubnationalCRVS)
+```
+
+# source scripts and load dependencies (will be replaced by a call to library() when a draft of the documentation is done)
+```{r, "source_scripts", message=FALSE, warning=FALSE, eval=FALSE}
+## source scripts
+source("../SubnationalCRVS/R/ComputeAgeHeapingScores.R")
+source("../SubnationalCRVS/R/ComputeAgeRatios.R")
+source("../SubnationalCRVS/R/ComputeSexRatios.R")
+source("../SubnationalCRVS/R/EstimateDDM.R")
+source("../SubnationalCRVS/R/GetOneAgeRatio.R")
+source("../SubnationalCRVS/R/Helpers.R")
+source("../SubnationalCRVS/R/PlotAgeHeapingScores.R")
+source("../SubnationalCRVS/R/PlotAgeRatios.R")
+source("../SubnationalCRVS/R/PlotDDM.R")
+source("../SubnationalCRVS/R/PlotPotentialAgeHeaping.R")
+source("../SubnationalCRVS/R/PlotSexRatios.R")
+## load dependencies
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+library(gridExtra)
+library(reshape2)
+library(DemoTools)
+library(DDM)
+```
+
+# Conduct DDQA
+## sex ratios
+```{r, "sex_ratios", message=FALSE, warning=FALSE}
+s <- PlotSexRatios(data=example_data_ecuador,
+                   name.disaggregations="province",
+                   name.males="m",
+                   name.females="f",
+                   name.age="age",
+                   name.sex="sex",
+                   name.date1="date1",
+                   name.date2="date2",
+                   name.population.year1="pop1",
+                   name.population.year2="pop2",
+                   line.size.overall=0.6,
+                   print.disaggregated=FALSE,
+                   print.overall=FALSE,
+                   plots.dir="Plots/")
+head(s)
+```
+## age ratios
+```{r, "age_ratios", message=FALSE, warning=FALSE}
+a <- PlotAgeRatios(data=example_data_ecuador,
+              name.disaggregations="province",
+              name.males="m",
+              name.females="f",
+              name.age="age",
+              name.sex="sex",
+              name.date1="date1",
+              name.date2="date2",
+              name.population.year1="pop1",
+              name.population.year2="pop2",
+              line.size.overall=0.6,
+              print.disaggregated=FALSE,
+              print.overall=FALSE,
+              plots.dir="Plots/")
+head(a)
+```
+
+## potential age heaping
+```{r, "age_heaping", message=FALSE, warning=FALSE}
+ PlotPotentialAgeHeaping(data=ecuador_age_tabulation,
+              name.disaggregations="province",
+              name.males="m",
+              name.females="f",
+              name.age="age",
+              name.sex="sex",
+              name.date1="date1",
+              name.date2="date2",
+              name.population.year1="pop1",
+              name.population.year2="pop2",
+              print.disaggregated=FALSE,
+              print.overall=FALSE,
+              plots.dir="Plots/")
+```
+
+## age heaping scores
+```{r, "age_heaping_scores", message=FALSE, warning=FALSE}
+ah <- PlotAgeHeapingScores(data=ecuador_age_tabulation,
+                                      name.disaggregations="province",
+                                      name.males="m",
+                                      name.females="f",
+                                      name.age="age",
+                                      name.sex="sex",
+                                      name.date1="date1",
+                                      name.date2="date2",
+                                      name.population.year1="pop1",
+                                      name.population.year2="pop2",
+                                      plots.dir="Plots/")
+head(ah)
+```
+
+# DDM estimation
+## computing DDM estimates
+```{r, "estimate_DDM", message=FALSE, warning=FALSE}
+(ddm_results <- EstimateDDM(data=example_data_ecuador, 
+            name.disaggregations="province",
+            name.age="age",
+            name.sex="sex",
+            name.males="m",
+            name.females="f",
+            name.date1="date1",
+            name.date2="date2",
+            name.population.year1="pop1",
+            name.population.year2="pop2",
+            name.deaths="deaths",
+            deaths.summed=TRUE,
+            min.age.in.search=15,
+            max.age.in.search=75,
+            min.number.of.ages=8,
+            life.expectancy.in.open.group=NULL,
+            exact.ages.to.use=NULL))
+```
+## plotting DDM estimates
+```{r, "plot_DDM", message=FALSE, warning=FALSE}
+PlotDDM(ddm_results=ddm_results,
+        size.text.sensitivity=8,
+        plots.dir="Plots/")
+```
+
+

@@ -41,7 +41,7 @@ fig.ncol.overall=1
 
 
 ## testing
-PlotSexRatios(data=example_data_ecuador,
+s <- PlotSexRatios(data=example_data_ecuador,
               name.disaggregations="province",
               name.males="m",
               name.females="f",

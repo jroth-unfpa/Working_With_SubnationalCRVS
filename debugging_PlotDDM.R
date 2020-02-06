@@ -2,7 +2,6 @@
 rm(list=ls())
 
 # load example datasets and necessary packages
-load("../SubnationalCRVS/src/example_data_rabat.rda")
 load("../SubnationalCRVS/src/example_data_ecuador.rda")
 library(dplyr)
 library(DDM)
