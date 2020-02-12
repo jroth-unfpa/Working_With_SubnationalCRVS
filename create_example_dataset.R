@@ -3,24 +3,36 @@ rm(list=ls())
 library(dplyr)
 memory.limit(size=56000)
 
-# ddm-ready dataset with 5-year age groups: Ecuador
-example_data_ecuador <- read.csv("data/data_for_ddm_ecuador.csv", 
+# ddm-ready dataset with 5-year age groups: Ecuador (shared by Andres Peralta and created by publicly available data)
+example_data_ecuador_initial <- read.csv("data/data_for_ddm_ecuador.csv", 
                          header=TRUE, stringsAsFactors=FALSE)
+cod_names <- read.csv("data/cod_to_names.csv",
+                      header=TRUE, stringsAsFactors=FALSE)
+example_data_ecuador <- left_join(example_data_ecuador_initial,
+                                  cod_names,
+                                  by="cod")
+rm(example_data_ecuador_initial)
 example_data_ecuador <- example_data_ecuador %>% 
-                         rename("province"="cod")
-save(example_data_ecuador, file="SubnationalCRVS/src/example_data_ecuador.rda")
+                        filter(cod != 90) %>% 
+                         rename("province"="cod",
+                                "province_name"="cod_name",
+                                "province_name_short"="cod_name_short")
+save(example_data_ecuador, file="../SubnationalCRVS/src/example_data_ecuador.rda")
 
 # ddm-ready dataset with 5-year age groups: Rabat
 example_data_rabat <- read.csv("data/data_for_ddm_rabat.csv", 
                                  header=TRUE, stringsAsFactors=FALSE)
 example_data_rabat <- example_data_rabat %>%
                       rename("residence_type"="cod")
-save(example_data_rabat, file="SubnationalCRVS/src/example_data_rabat.rda")
+save(example_data_rabat, file="../SubnationalCRVS/src/example_data_rabat.rda")
 
 
 # load raw province-specific Census files from Ecuador that show single-year ages
 # source: https://www.ecuadorencifras.gob.ec/base-de-datos-censo-de-poblacion-y-vivienda-2010/
 # I will just share the tabulations that give me the age counts, though
+create_single_year_ecuador <- FALSE
+
+if (create_single_year_ecuador == TRUE) {
 library(haven)
 # 2010
 ### create shell to store single-year tabulations
@@ -1451,5 +1463,17 @@ ecuador_age_tabulation <- ecuador_age_tabulation %>%
                           mutate(sex=recode(sex,
                                             `1`="m",
                                             `2`="f"))
+
+ecuador_age_tabulation <- left_join(ecuador_age_tabulation,
+                                    cod_names,
+                                    by=c("province"="cod")) %>%
+  rename("province_name"="cod_name",
+         "province_name_short"="cod_name_short")
+ecuador_age_tabulation <- ecuador_age_tabulation %>% filter(is.na(province_name_short) == FALSE)
 save(ecuador_age_tabulation, 
-     file="SubnationalCRVS/src/ecuador_age_tabulation.rda")
+     file="../SubnationalCRVS/src/ecuador_age_tabulation.rda")
+
+} else {
+  load("../SubnationalCRVS/src/ecuador_age_tabulation.rda")
+}
+

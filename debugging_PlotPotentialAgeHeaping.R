@@ -2,7 +2,7 @@
 rm(list=ls())
 
 # load example dataset and necessary packages
-load("data/ecuador_age_tabulation.rda")
+load("../SubnationalCRVS/src/ecuador_age_tabulation.rda")
 library(ggplot2)
 library(ggpubr)
 library(gridExtra)
@@ -12,12 +12,12 @@ library(DemoTools)
 # ComputeRatioRatios()
 ## source function
 source("../SubnationalCRVS/R/ComputeAgeRatios.R")
-source("../SubnationalCRVS/R/GetOneAgeRatio.R")
+source("../SubnationalCRVS/R/Helpers.R")
 source("../SubnationalCRVS/R/PlotPotentialAgeHeaping.R")
 
 ## specify arguments
 data <- ecuador_age_tabulation
-name.disaggregations <- "province"
+name.disaggregations <- "province_name_short"
 name.males <- "m"
 name.females <- "f"
 name.age <- "age" 
@@ -42,7 +42,7 @@ mark_multiples_of_5 <- TRUE
 
 ## testing
 PlotPotentialAgeHeaping(data=ecuador_age_tabulation,
-              name.disaggregations="province",
+              name.disaggregations="province_name_short",
               name.males="m",
               name.females="f",
               name.age="age",

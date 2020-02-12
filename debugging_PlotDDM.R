@@ -29,7 +29,7 @@ plots.dir="Plots/"
 
 ## testing
 (ddm_results <- EstimateDDM(data=example_data_ecuador, 
-            name.disaggregations="province",
+            name.disaggregations="province_name",
             name.age="age",
             name.sex="sex",
             name.males="m",

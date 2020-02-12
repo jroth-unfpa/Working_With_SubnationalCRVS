@@ -2,7 +2,10 @@
 title: "SubnationalCRVS Demo"
 author: "Jeremy Roth"
 date: ""
-output: html_document
+output: 
+  html_document:
+    number_sections: yes 
+    toc: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -17,33 +20,33 @@ load("../SubnationalCRVS/src/example_data_ecuador.rda")
 ```
 
 # load package
-```{r, "load_package"}
+```{r, "load_package", message=FALSE, warning=FALSE}
 library(SubnationalCRVS)
 ```
 
-# source scripts and load dependencies (will be replaced by a call to library() when a draft of the documentation is done)
-```{r, "source_scripts", message=FALSE, warning=FALSE, eval=FALSE}
-## source scripts
-source("../SubnationalCRVS/R/ComputeAgeHeapingScores.R")
-source("../SubnationalCRVS/R/ComputeAgeRatios.R")
-source("../SubnationalCRVS/R/ComputeSexRatios.R")
-source("../SubnationalCRVS/R/EstimateDDM.R")
-source("../SubnationalCRVS/R/GetOneAgeRatio.R")
-source("../SubnationalCRVS/R/Helpers.R")
-source("../SubnationalCRVS/R/PlotAgeHeapingScores.R")
-source("../SubnationalCRVS/R/PlotAgeRatios.R")
-source("../SubnationalCRVS/R/PlotDDM.R")
-source("../SubnationalCRVS/R/PlotPotentialAgeHeaping.R")
-source("../SubnationalCRVS/R/PlotSexRatios.R")
-## load dependencies
-library(dplyr)
-library(ggplot2)
-library(ggpubr)
-library(gridExtra)
-library(reshape2)
-library(DemoTools)
-library(DDM)
-```
+<!-- # source scripts and load dependencies (will be replaced by a call to library() when a draft of the documentation is done) -->
+<!-- ```{r, "source_scripts", message=FALSE, warning=FALSE, eval=FALSE} -->
+<!-- ## source scripts -->
+<!-- source("../SubnationalCRVS/R/ComputeAgeHeapingScores.R") -->
+<!-- source("../SubnationalCRVS/R/ComputeAgeRatios.R") -->
+<!-- source("../SubnationalCRVS/R/ComputeSexRatios.R") -->
+<!-- source("../SubnationalCRVS/R/EstimateDDM.R") -->
+<!-- source("../SubnationalCRVS/R/GetOneAgeRatio.R") -->
+<!-- source("../SubnationalCRVS/R/Helpers.R") -->
+<!-- source("../SubnationalCRVS/R/PlotAgeHeapingScores.R") -->
+<!-- source("../SubnationalCRVS/R/PlotAgeRatios.R") -->
+<!-- source("../SubnationalCRVS/R/PlotDDM.R") -->
+<!-- source("../SubnationalCRVS/R/PlotPotentialAgeHeaping.R") -->
+<!-- source("../SubnationalCRVS/R/PlotSexRatios.R") -->
+<!-- ## load dependencies -->
+<!-- library(dplyr) -->
+<!-- library(ggplot2) -->
+<!-- library(ggpubr) -->
+<!-- library(gridExtra) -->
+<!-- library(reshape2) -->
+<!-- library(DemoTools) -->
+<!-- library(DDM) -->
+<!-- ``` -->
 
 # Conduct DDQA
 ## sex ratios
@@ -119,7 +122,7 @@ head(ah)
 # DDM estimation
 ## computing DDM estimates
 ```{r, "estimate_DDM", message=FALSE, warning=FALSE}
-(ddm_results <- EstimateDDM(data=example_data_ecuador, 
+ddm_results <- EstimateDDM(data=example_data_ecuador, 
             name.disaggregations="province",
             name.age="age",
             name.sex="sex",
@@ -135,7 +138,9 @@ head(ah)
             max.age.in.search=75,
             min.number.of.ages=8,
             life.expectancy.in.open.group=NULL,
-            exact.ages.to.use=NULL))
+            exact.ages.to.use=NULL)
+head(ddm_results$ddm_estimates)
+head(ddm_results$sensitivity_ddm_estimates)
 ```
 ## plotting DDM estimates
 ```{r, "plot_DDM", message=FALSE, warning=FALSE}

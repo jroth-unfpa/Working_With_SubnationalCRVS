@@ -2,8 +2,8 @@
 rm(list=ls())
 
 # load example datasets and necessary packages
-load("data/example_data_rabat.rda")
-load("data/example_data_ecuador.rda")
+load("../SubnationalCRVS/src/example_data_rabat.rda")
+load("../SubnationalCRVS/src/example_data_ecuador.rda")
 library(ggplot2)
 library(ggpubr)
 library(gridExtra)
@@ -17,7 +17,7 @@ source("../SubnationalCRVS/R/PlotSexRatios.R")
 
 ## specify arguments
 data <- example_data_ecuador
-name.disaggregations <- "province"
+name.disaggregations <- "province_name_short"
 name.males <- "m"
 name.females <- "f"
 name.age <- "age" 
@@ -42,7 +42,7 @@ fig.ncol.overall=1
 
 ## testing
 s <- PlotSexRatios(data=example_data_ecuador,
-              name.disaggregations="province",
+              name.disaggregations="province_name",
               name.males="m",
               name.females="f",
               name.age="age",

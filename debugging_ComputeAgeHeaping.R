@@ -2,15 +2,15 @@
 rm(list=ls())
 
 # load example dataset and necessary packages
-load("data/ecuador_age_tabulation.rda")
+load("../SubnationalCRVS/src/ecuador_age_tabulation.rda")
 library(dplyr)
 library(DemoTools)
 library(ggplot2)
 
 # ComputeRatioRatios()
 ## source function
-source("R/ComputeAgeHeaping.R")
-source("R/Helpers.R")
+source("../SubnationalCRVS/R/ComputeAgeHeapingScores.R")
+source("../SubnationalCRVS/R/Helpers.R")
 
 ## specify arguments
 data <- ecuador_age_tabulation

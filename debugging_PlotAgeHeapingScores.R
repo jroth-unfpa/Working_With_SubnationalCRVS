@@ -2,7 +2,7 @@
 rm(list=ls())
 
 # load example dataset and necessary packages
-load("data/ecuador_age_tabulation.rda")
+load("../SubnationalCRVS/src/ecuador_age_tabulation.rda")
 library(dplyr)
 library(DemoTools)
 library(ggplot2)
@@ -16,7 +16,7 @@ source("../SubnationalCRVS/R/PlotAgeHeapingScores.R")
 
 ## specify arguments
 data <- ecuador_age_tabulation
-name.disaggregations <- "province"
+name.disaggregations <- "province_name_short"
 name.males <- "m"
 name.females <- "f"
 name.age <- "age" 
@@ -36,6 +36,9 @@ Whipple.age.max <- NULL
 Whipple.digit <- NULL
 Myers.age.min <- NULL
 Myers.age.max <- NULL
+Noumbissi.age.min <- NULL
+Noumbissi.age.max <- NULL
+Noumbissi.digit <- NULL
 fig.nrow <- 2
 fig.ncol <- 2
 print.plots <- TRUE
@@ -45,7 +48,7 @@ plots.dir <- ""
 
 ## testing
 test_age_heaping <- ComputeAgeHeapingScores(data=ecuador_age_tabulation,
-                        name.disaggregations="province",
+                        name.disaggregations="province_name_short",
                         name.males="m",
                         name.females="f",
                         name.age="age",
@@ -56,7 +59,7 @@ test_age_heaping <- ComputeAgeHeapingScores(data=ecuador_age_tabulation,
                         name.population.year2="pop2")
 
 test_age_heaping_plotting <- PlotAgeHeapingScores(data=ecuador_age_tabulation,
-                                      name.disaggregations="province",
+                                      name.disaggregations="province_name_short",
                                       name.males="m",
                                       name.females="f",
                                       name.age="age",
