@@ -1,16 +1,19 @@
 ---
 title: "SubnationalCRVS Demo"
 author: "Jeremy Roth"
-date: ""
-output: 
+date: ''
+output:
   html_document:
-    number_sections: yes 
+    number_sections: yes
+    toc: yes
+  pdf_document:
     toc: yes
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 rm(list=ls())
+library(knitr)
 ```
 
 # load data
@@ -50,9 +53,9 @@ library(SubnationalCRVS)
 
 # Conduct DDQA
 ## sex ratios
-```{r, "sex_ratios", message=FALSE, warning=FALSE}
+```{r, "sex_ratios", message=FALSE, warning=FALSE, fig.cap="A caption"}
 s <- PlotSexRatios(data=example_data_ecuador,
-                   name.disaggregations="province",
+                   name.disaggregations="province_name",
                    name.males="m",
                    name.females="f",
                    name.age="age",
@@ -65,12 +68,12 @@ s <- PlotSexRatios(data=example_data_ecuador,
                    print.disaggregated=FALSE,
                    print.overall=FALSE,
                    plots.dir="Plots/")
-head(s)
+# knitr::include_graphics(path="Plots/sex_ratios_combined_province_name_2020-02-12.pdf") # not working :(
 ```
 ## age ratios
-```{r, "age_ratios", message=FALSE, warning=FALSE}
+```{r, "age_ratios", message=FALSE, warning=FALSE, eval=TRUE}
 a <- PlotAgeRatios(data=example_data_ecuador,
-              name.disaggregations="province",
+              name.disaggregations="province_name",
               name.males="m",
               name.females="f",
               name.age="age",
@@ -87,9 +90,9 @@ head(a)
 ```
 
 ## potential age heaping
-```{r, "age_heaping", message=FALSE, warning=FALSE}
+```{r, "age_heaping", message=FALSE, warning=FALSE, eval=TRUE}
  PlotPotentialAgeHeaping(data=ecuador_age_tabulation,
-              name.disaggregations="province",
+              name.disaggregations="province_name",
               name.males="m",
               name.females="f",
               name.age="age",
@@ -104,9 +107,9 @@ head(a)
 ```
 
 ## age heaping scores
-```{r, "age_heaping_scores", message=FALSE, warning=FALSE}
-ah <- PlotAgeHeapingScores(data=ecuador_age_tabulation,
-                                      name.disaggregations="province",
+```{r, "age_heaping_scores", message=FALSE, warning=FALSE, eval=TRUE}
+ageheaping <- PlotAgeHeapingScores(data=ecuador_age_tabulation,
+                                      name.disaggregations="province_name_short",
                                       name.males="m",
                                       name.females="f",
                                       name.age="age",
@@ -116,14 +119,14 @@ ah <- PlotAgeHeapingScores(data=ecuador_age_tabulation,
                                       name.population.year1="pop1",
                                       name.population.year2="pop2",
                                       plots.dir="Plots/")
-head(ah)
+head(ageheaping)
 ```
 
 # DDM estimation
 ## computing DDM estimates
-```{r, "estimate_DDM", message=FALSE, warning=FALSE}
+```{r, "estimate_DDM", message=TRUE, warning=FALSE, eval=TRUE}
 ddm_results <- EstimateDDM(data=example_data_ecuador, 
-            name.disaggregations="province",
+            name.disaggregations="province_name",
             name.age="age",
             name.sex="sex",
             name.males="m",
@@ -143,7 +146,7 @@ head(ddm_results$ddm_estimates)
 head(ddm_results$sensitivity_ddm_estimates)
 ```
 ## plotting DDM estimates
-```{r, "plot_DDM", message=FALSE, warning=FALSE}
+```{r, "plot_DDM", message=FALSE, warning=FALSE, eval=TRUE}
 PlotDDM(ddm_results=ddm_results,
         size.text.sensitivity=8,
         plots.dir="Plots/")
