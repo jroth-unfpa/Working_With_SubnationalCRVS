@@ -2,7 +2,7 @@
 rm(list=ls())
 
 # load example dataset and necessary packages
-load("../SubnationalCRVS/src/ecuador_age_tabulation.rda")
+load("../SubnationalCRVS/data/ecuador_age_tabulation.rda")
 library(ggplot2)
 library(ggpubr)
 library(gridExtra)

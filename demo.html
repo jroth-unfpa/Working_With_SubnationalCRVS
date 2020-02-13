@@ -373,8 +373,9 @@ summary {
 <li><a href="#load-package"><span class="toc-section-number">2</span> load package</a></li>
 <li><a href="#conduct-ddqa"><span class="toc-section-number">3</span> Conduct DDQA</a><ul>
 <li><a href="#sex-ratios"><span class="toc-section-number">3.1</span> sex ratios</a></li>
-<li><a href="#potential-age-heaping"><span class="toc-section-number">3.2</span> potential age heaping</a></li>
-<li><a href="#age-heaping-scores"><span class="toc-section-number">3.3</span> age heaping scores</a></li>
+<li><a href="#age-ratios"><span class="toc-section-number">3.2</span> age ratios</a></li>
+<li><a href="#potential-age-heaping"><span class="toc-section-number">3.3</span> potential age heaping</a></li>
+<li><a href="#age-heaping-scores"><span class="toc-section-number">3.4</span> age heaping scores</a></li>
 </ul></li>
 <li><a href="#ddm-estimation"><span class="toc-section-number">4</span> DDM estimation</a><ul>
 <li><a href="#computing-ddm-estimates"><span class="toc-section-number">4.1</span> computing DDM estimates</a></li>
@@ -433,10 +434,12 @@ load(&quot;../SubnationalCRVS/src/example_data_ecuador.rda&quot;)</code></pre>
                    print.disaggregated=FALSE,
                    print.overall=FALSE,
                    plots.dir=&quot;Plots/&quot;)
-knitr::include_graphics(path=&quot;Plots/sex_ratios_combined_province_name_2020-02-12.pdf&quot;)</code></pre>
-<p><embed src="data:application/pdf;base64,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tbXqfXVK9UiNV017rWbtptrXu3m7r+zx2NNWp1VXWvdur2DvzXq/+s4Go4aKfZh9OfseNkY39n/N+rq5SaOptOnDfuF+6YGIA33Njs3NLZotZa1wq6R18mDCwcvfeH/T3cZsq2+nt5ceAockhx5/m/jt9cNBh3uPsI60fWf4XW0HtaOkE+pc3jnVldIl7Y7rHj4aeLS3x6Wn43vL7/cf0z1Wc1zleNkJwomiE59O5p+cPpV16unp5NNjvUt675yJPXOtL7xv8GzQ2fPnfM+d6ffsP3ne9fyxC84Xjl5kXey65HCpc8B+oOMH+x86Bh0GO4cch7ovO13uGZ43fOKK+5XTV72vnrsWcO3SyPyR4etR12/eSLghvcm7+ehW+q3nt3Nuz9xZcxd9t+Se0r2K+5r3G340/bFd6iA9Puo9OvBgwYM7Y9yxJz9l//R+vOgh+WHFhM5E8yPbR8cmfScvP174ePxJ1pOZp8U/K/9c+8zk2Xe/ePwyMBU7Nf5c9PzTr5tfqL/Y/9LuZe902PT9VxmvZl6XvFF/c+At623/u5h3EzO577HvKz+Yfuj5GPTx7qeMT59+A/eE8/tlbmRzdHJlYW0KZW5kb2JqCjkgMCBvYmoKPDwKL1R5cGUgL0VuY29kaW5nIC9CYXNlRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZwovRGlmZmVyZW5jZXMgWyA0NS9taW51cyA5Ni9xdW90ZWxlZnQKMTQ0L2RvdGxlc3NpIC9ncmF2ZSAvYWN1dGUgL2NpcmN1bWZsZXggL3RpbGRlIC9tYWNyb24gL2JyZXZlIC9kb3RhY2NlbnQKL2RpZXJlc2lzIC8ubm90ZGVmIC9yaW5nIC9jZWRpbGxhIC8ubm90ZGVmIC9odW5nYXJ1bWxhdXQgL29nb25layAvY2Fyb24gL3NwYWNlXQo+PgplbmRvYmoKMTAgMCBvYmoKPDwgL1R5cGUgL0ZvbnQgL1N1YnR5cGUgL1R5cGUxIC9OYW1lIC9GMiAvQmFzZUZvbnQgL0hlbHZldGljYQovRW5jb2RpbmcgOSAwIFIgPj4KZW5kb2JqCnhyZWYKMCAxMQowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMjEgMDAwMDAgbiAKMDAwMDAwMDE2MyAwMDAwMCBuIAowMDAwMDA2NTM3IDAwMDAwIG4gCjAwMDAwMDY2MjAgMDAwMDAgbiAKMDAwMDAwNjczMiAwMDAwMCBuIAowMDAwMDA2NzY1IDAwMDAwIG4gCjAwMDAwMDAyMTIgMDAwMDAgbiAKMDAwMDAwMDI5MiAwMDAwMCBuIAowMDAwMDA5NDYwIDAwMDAwIG4gCjAwMDAwMDk3MTcgMDAwMDAgbiAKdHJhaWxlcgo8PCAvU2l6ZSAxMSAvSW5mbyAxIDAgUiAvUm9vdCAyIDAgUiA+PgpzdGFydHhyZWYKOTgxNAolJUVPRgo="></embed> ## age ratios</p>
+# knitr::include_graphics(path=&quot;Plots/sex_ratios_combined_province_name_2020-02-12.pdf&quot;) # not working :(</code></pre>
+</div>
+<div id="age-ratios" class="section level2">
+<h2><span class="header-section-number">3.2</span> age ratios</h2>
 <pre class="r"><code>a &lt;- PlotAgeRatios(data=example_data_ecuador,
-              name.disaggregations=&quot;province&quot;,
+              name.disaggregations=&quot;province_name&quot;,
               name.males=&quot;m&quot;,
               name.females=&quot;f&quot;,
               name.age=&quot;age&quot;,
@@ -450,11 +453,25 @@ knitr::include_graphics(path=&quot;Plots/sex_ratios_combined_province_name_2020-
               print.overall=FALSE,
               plots.dir=&quot;Plots/&quot;)
 head(a)</code></pre>
+<pre><code>##   province sex age  pop1  pop2 deaths      date1      date2 province_name
+## 1        1   f   0 33491 33876    691 2001-11-25 2010-11-28         Azuay
+## 2        1   f   5 33817 35701    161 2001-11-25 2010-11-28         Azuay
+## 3        1   f  10 34975 37366    162 2001-11-25 2010-11-28         Azuay
+## 4        1   f  15 34181 37215    237 2001-11-25 2010-11-28         Azuay
+## 5        1   f  20 31000 35753    212 2001-11-25 2010-11-28         Azuay
+## 6        1   f  25 23844 32054    182 2001-11-25 2010-11-28         Azuay
+##   province_name_short age_ratio_1 age_ratio_2
+## 1                 Azu          NA          NA
+## 2                 Azu    98.78480    100.2246
+## 3                 Azu   102.87067    102.4905
+## 4                 Azu   103.61804    101.7930
+## 5                 Azu   106.85050    103.2294
+## 6                 Azu    91.15202    102.9467</code></pre>
 </div>
 <div id="potential-age-heaping" class="section level2">
-<h2><span class="header-section-number">3.2</span> potential age heaping</h2>
+<h2><span class="header-section-number">3.3</span> potential age heaping</h2>
 <pre class="r"><code> PlotPotentialAgeHeaping(data=ecuador_age_tabulation,
-              name.disaggregations=&quot;province&quot;,
+              name.disaggregations=&quot;province_name&quot;,
               name.males=&quot;m&quot;,
               name.females=&quot;f&quot;,
               name.age=&quot;age&quot;,
@@ -466,11 +483,12 @@ head(a)</code></pre>
               print.disaggregated=FALSE,
               print.overall=FALSE,
               plots.dir=&quot;Plots/&quot;)</code></pre>
+<pre><code>## [1] &quot;need to add a way to check for single-year ages&quot;</code></pre>
 </div>
 <div id="age-heaping-scores" class="section level2">
-<h2><span class="header-section-number">3.3</span> age heaping scores</h2>
-<pre class="r"><code>ah &lt;- PlotAgeHeapingScores(data=ecuador_age_tabulation,
-                                      name.disaggregations=&quot;province&quot;,
+<h2><span class="header-section-number">3.4</span> age heaping scores</h2>
+<pre class="r"><code>ageheaping &lt;- PlotAgeHeapingScores(data=ecuador_age_tabulation,
+                                      name.disaggregations=&quot;province_name_short&quot;,
                                       name.males=&quot;m&quot;,
                                       name.females=&quot;f&quot;,
                                       name.age=&quot;age&quot;,
@@ -479,8 +497,23 @@ head(a)</code></pre>
                                       name.date2=&quot;date2&quot;,
                                       name.population.year1=&quot;pop1&quot;,
                                       name.population.year2=&quot;pop2&quot;,
-                                      plots.dir=&quot;Plots/&quot;)
-head(ah)</code></pre>
+                                      plots.dir=&quot;Plots/&quot;)</code></pre>
+<pre><code>## [1] &quot;need to add a way to check for single-year ages&quot;</code></pre>
+<pre class="r"><code>head(ageheaping)</code></pre>
+<pre><code>##         date sex province_name_short roughness sawtooth  Whipple    Myers
+## 1 2001-11-25   f                 Azu 0.4147020 1.088489 1.175319 4.208178
+## 2 2001-11-25   f                 Bol 0.9084333 1.088353 1.367128 7.385046
+## 3 2001-11-25   f                 Cañ 0.6851925 1.114108 1.218101 4.890340
+## 4 2001-11-25   f                 Car 0.3808346 1.006139 1.177630 3.749306
+## 5 2001-11-25   f                 Chi 0.3446924 1.033020 1.249514 5.440711
+## 6 2001-11-25   f                 Cot 0.3409448 1.040521 1.274695 5.991138
+##   Noumbissi
+## 1  1.179950
+## 2  1.348939
+## 3  1.220498
+## 4  1.153915
+## 5  1.228173
+## 6  1.246202</code></pre>
 </div>
 </div>
 <div id="ddm-estimation" class="section level1">
@@ -488,7 +521,7 @@ head(ah)</code></pre>
 <div id="computing-ddm-estimates" class="section level2">
 <h2><span class="header-section-number">4.1</span> computing DDM estimates</h2>
 <pre class="r"><code>ddm_results &lt;- EstimateDDM(data=example_data_ecuador, 
-            name.disaggregations=&quot;province&quot;,
+            name.disaggregations=&quot;province_name&quot;,
             name.age=&quot;age&quot;,
             name.sex=&quot;sex&quot;,
             name.males=&quot;m&quot;,
@@ -503,9 +536,24 @@ head(ah)</code></pre>
             max.age.in.search=75,
             min.number.of.ages=8,
             life.expectancy.in.open.group=NULL,
-            exact.ages.to.use=NULL)
-head(ddm_results$ddm_estimates)
-head(ddm_results$sensitivity_ddm_estimates)</code></pre>
+            exact.ages.to.use=NULL)</code></pre>
+<pre><code>## [1] &quot;performing DDM estimation within each of 21 possible age ranges...&quot;</code></pre>
+<pre class="r"><code>head(ddm_results$ddm_estimates)</code></pre>
+<pre><code>##       cod     sex    ggbseg       ggb       seg lower_age_range upper_age_range
+## 1   Azuay Females 0.6690215 0.9869457 0.8062717              15              50
+## 2   Azuay   Males 0.7268026 1.0688804 0.9169165              15              50
+## 3 Bolivar Females 0.7128565 0.9876368 0.7200723              20              60
+## 4 Bolivar   Males 0.7427068 0.9553584 0.7963881              25              60
+## 5   Cañar Females 0.6188313 0.9981219 0.5754533              20              55
+## 6   Cañar   Males 0.7085910 0.9534686 0.7923367              15              50</code></pre>
+<pre class="r"><code>head(ddm_results$sensitivity_ddm_estimates)</code></pre>
+<pre><code>##     cod     sex    ggbseg       ggb       seg lower_age_range upper_age_range
+## 1 Azuay Females 0.6104842 0.9869457 0.8112473              15              50
+## 2 Azuay Females 0.6387823 0.8742469 0.8089535              15              55
+## 3 Azuay Females 0.6293945 0.8566154 0.8057450              20              55
+## 4 Azuay Females 0.6690215 0.8292898 0.8062717              15              60
+## 5 Azuay Females 0.6607905 0.8151276 0.8031217              20              60
+## 6 Azuay Females 0.6505367 0.7836742 0.8012668              25              60</code></pre>
 </div>
 <div id="plotting-ddm-estimates" class="section level2">
 <h2><span class="header-section-number">4.2</span> plotting DDM estimates</h2>

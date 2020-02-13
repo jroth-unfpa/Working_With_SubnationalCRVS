@@ -2,8 +2,8 @@
 rm(list=ls())
 
 # load example datasets and necessary packages
-load("data/example_data_rabat.rda")
-load("data/example_data_ecuador.rda")
+load("../SubnationalCRVS/data/example_data_ecuador.rda")
+load("../SubnationalCRVS/data/example_data_rabat.rda")
 library(dplyr)
 
 # ComputeSexRatios()
@@ -31,6 +31,8 @@ ecuador_sex_ratio <- ComputeSexRatios(data=example_data_ecuador,
                       name.females="f",
                       name.age="age",
                       name.sex="sex",
+                      name.date1="date1",
+                      name.date2="date2",
                       name.population.year1="pop1",
                       name.population.year2="pop2")
 ecuador_sex_ratio %>% filter(age == "25") %>%
