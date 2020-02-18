@@ -1,3 +1,4 @@
+- Add descriptions of values (i.e. objects returned) by all documented functions
 - fix display of mathematical expressions in roxygen2 documentation
 - remove numeric province column from Ecuador example datasets (also move disaggregated names to first two columns with arrange())
 - *add a check that at least all of the required arguments (data, names_) are provided, simple error for each one that is not

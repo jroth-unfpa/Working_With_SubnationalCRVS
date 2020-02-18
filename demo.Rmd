@@ -3,57 +3,36 @@ title: "SubnationalCRVS Demo"
 author: "Jeremy Roth"
 date: ''
 output:
+  pdf_document:
+    toc: yes
   html_document:
     number_sections: yes
     toc: yes
-  pdf_document:
-    toc: yes
+header-includes:
+ \usepackage{float}
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r "clear", include=FALSE}
 rm(list=ls())
-library(knitr)
 ```
 
-# load data
-```{r, "load_data"}
-load("../SubnationalCRVS/src/ecuador_age_tabulation.rda")
-load("../SubnationalCRVS/src/example_data_ecuador.rda")
-```
-
-# load package
-```{r, "load_package", message=FALSE, warning=FALSE}
+# setting up
+## load SubnationalCRVS package (includes example data)
+```{r "load_package", message=FALSE, warning=FALSE}
 library(SubnationalCRVS)
 ```
 
-<!-- # source scripts and load dependencies (will be replaced by a call to library() when a draft of the documentation is done) -->
-<!-- ```{r, "source_scripts", message=FALSE, warning=FALSE, eval=FALSE} -->
-<!-- ## source scripts -->
-<!-- source("../SubnationalCRVS/R/ComputeAgeHeapingScores.R") -->
-<!-- source("../SubnationalCRVS/R/ComputeAgeRatios.R") -->
-<!-- source("../SubnationalCRVS/R/ComputeSexRatios.R") -->
-<!-- source("../SubnationalCRVS/R/EstimateDDM.R") -->
-<!-- source("../SubnationalCRVS/R/GetOneAgeRatio.R") -->
-<!-- source("../SubnationalCRVS/R/Helpers.R") -->
-<!-- source("../SubnationalCRVS/R/PlotAgeHeapingScores.R") -->
-<!-- source("../SubnationalCRVS/R/PlotAgeRatios.R") -->
-<!-- source("../SubnationalCRVS/R/PlotDDM.R") -->
-<!-- source("../SubnationalCRVS/R/PlotPotentialAgeHeaping.R") -->
-<!-- source("../SubnationalCRVS/R/PlotSexRatios.R") -->
-<!-- ## load dependencies -->
-<!-- library(dplyr) -->
-<!-- library(ggplot2) -->
-<!-- library(ggpubr) -->
-<!-- library(gridExtra) -->
-<!-- library(reshape2) -->
-<!-- library(DemoTools) -->
-<!-- library(DDM) -->
-<!-- ``` -->
+## additional settings for the demo
+```{r "configure_demo", warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(knitr)
+my_plots_dir <- "Plots/"
+```
 
 # Conduct DDQA
-## sex ratios
-```{r, "sex_ratios", message=FALSE, warning=FALSE, fig.cap="A caption"}
+## sex ratio
+```{r "sex_ratios", message=FALSE, warning=FALSE}
 s <- PlotSexRatios(data=example_data_ecuador,
                    name.disaggregations="province_name",
                    name.males="m",
@@ -68,10 +47,23 @@ s <- PlotSexRatios(data=example_data_ecuador,
                    print.disaggregated=FALSE,
                    print.overall=FALSE,
                    plots.dir="Plots/")
-# knitr::include_graphics(path="Plots/sex_ratios_combined_province_name_2020-02-12.pdf") # not working :(
 ```
+### view sex ratios in table
+```{r ¨sex_ratios_table"}
+s %>% select(province_name, age, pop1, pop2, sex_ratio_1, sex_ratio_2) %>%
+      head()
+```
+
+### view sex ratios in plot 
+```{r echo=FALSE, fig.cap="A caption", fig.align="center", fig.pos="H", out.width = "60%"}
+knitr::include_graphics(path=paste0(my_plots_dir,
+                                   "sex_ratios_combined_province_name_",
+                                   Sys.Date(),
+                                   ".pdf"))
+```
+
 ## age ratios
-```{r, "age_ratios", message=FALSE, warning=FALSE, eval=TRUE}
+```{r "age_ratios", message=FALSE, warning=FALSE, eval=TRUE}
 a <- PlotAgeRatios(data=example_data_ecuador,
               name.disaggregations="province_name",
               name.males="m",
@@ -86,11 +78,23 @@ a <- PlotAgeRatios(data=example_data_ecuador,
               print.disaggregated=FALSE,
               print.overall=FALSE,
               plots.dir="Plots/")
-head(a)
+```
+### view age ratios in table
+```{r "age_ratios_table"}
+a %>% select(province_name, age, pop1, pop2, age_ratio_1, age_ratio_2) %>%
+      head()
+```
+### view age ratios in plot
+```{r "age_ratios_in_plot", echo=FALSE, fig.cap="A caption", fig.align="center", fig.pos="H", out.width = "60%"}
+knitr::include_graphics(path=paste0(my_plots_dir,
+                                   "age_ratios_combined_province_name_",
+                                   Sys.Date(),
+                                   ".pdf"))
+
 ```
 
 ## potential age heaping
-```{r, "age_heaping", message=FALSE, warning=FALSE, eval=TRUE}
+```{r "age_heaping", message=FALSE, warning=FALSE, eval=TRUE}
  PlotPotentialAgeHeaping(data=ecuador_age_tabulation,
               name.disaggregations="province_name",
               name.males="m",
@@ -107,7 +111,7 @@ head(a)
 ```
 
 ## age heaping scores
-```{r, "age_heaping_scores", message=FALSE, warning=FALSE, eval=TRUE}
+```{r "age_heaping_scores", message=FALSE, warning=FALSE, eval=TRUE}
 ageheaping <- PlotAgeHeapingScores(data=ecuador_age_tabulation,
                                       name.disaggregations="province_name_short",
                                       name.males="m",
@@ -124,7 +128,7 @@ head(ageheaping)
 
 # DDM estimation
 ## computing DDM estimates
-```{r, "estimate_DDM", message=TRUE, warning=FALSE, eval=TRUE}
+```{r "estimate_DDM", message=TRUE, warning=FALSE, eval=TRUE}
 ddm_results <- EstimateDDM(data=example_data_ecuador, 
             name.disaggregations="province_name",
             name.age="age",
@@ -139,14 +143,12 @@ ddm_results <- EstimateDDM(data=example_data_ecuador,
             deaths.summed=TRUE,
             min.age.in.search=15,
             max.age.in.search=75,
-            min.number.of.ages=8,
-            life.expectancy.in.open.group=NULL,
-            exact.ages.to.use=NULL)
+            min.number.of.ages=8)
 head(ddm_results$ddm_estimates)
 head(ddm_results$sensitivity_ddm_estimates)
 ```
 ## plotting DDM estimates
-```{r, "plot_DDM", message=FALSE, warning=FALSE, eval=TRUE}
+```{r "plot_DDM", message=FALSE, warning=FALSE, eval=TRUE}
 PlotDDM(ddm_results=ddm_results,
         size.text.sensitivity=8,
         plots.dir="Plots/")

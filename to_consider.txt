@@ -1,3 +1,6 @@
+- Ramoudane's idea: Cheat sheet for package -- starting with clean dataset then what?
+	- long-term perspective: how can they really use R in the future?
+	- repetitive tasks: R; one-time very case-specific (e.g. clean specific dataset): Excel, SPSS< whatever
 - Add descriptions of values (i.e. objects returned) by all documented functions
 - fix display of mathematical expressions in roxygen2 documentation
 - remove numeric province column from Ecuador example datasets (also move disaggregated names to first two columns with arrange())
@@ -12,4 +15,4 @@
 - how to handle DemoTools dependency because the package must be installed with DemoTools (i.e. it's not on CRAN)
 - user-specified plot titles
 - adaptive way to choose (nrow, ncol) in plotting functions without user input
-
+- FUTURE WORK (e.g. add to poster): Age smoothing after age-heaping indices are calculated
