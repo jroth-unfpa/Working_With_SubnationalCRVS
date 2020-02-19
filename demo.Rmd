@@ -151,7 +151,7 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 ## Age heaping indices
 ```{r "age_heaping_scores", message=FALSE, warning=FALSE, eval=TRUE}
 ageheaping <- PlotAgeHeapingScores(data=ecuador_age_tabulation,
-                                      name.disaggregations="province_name",
+                                      name.disaggregations="province_name_short",
                                       name.males="m",
                                       name.females="f",
                                       name.age="age",
@@ -170,7 +170,7 @@ head(ageheaping)
 ### View age heaping indices in plots
 ```{r "plot_age_heaping_indices", echo=TRUE, fig.cap="Age heaping indices in Ecuador by province", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
-                                   "age_heaping_scores_combined_province_name_",
+                                   "age_heaping_scores_combined_province_name_short_",
                                    Sys.Date(),
                                    ".pdf"))
 ```
