@@ -1,7 +1,7 @@
 # Jeremy Roth
 rm(list=ls())
 library(dplyr)
-memory.limit(size=56000)
+memory.limit(size=56000) 
 
 # ddm-ready dataset with 5-year age groups: Ecuador (shared by Andres Peralta and created by publicly available data)
 example_data_ecuador_initial <- read.csv("data/data_for_ddm_ecuador.csv", 
@@ -14,10 +14,20 @@ example_data_ecuador <- left_join(example_data_ecuador_initial,
 rm(example_data_ecuador_initial)
 example_data_ecuador <- example_data_ecuador %>% 
                         filter(cod != 90) %>% 
-                         rename("province"="cod",
+                        rename("province"="cod",
                                 "province_name"="cod_name",
-                                "province_name_short"="cod_name_short")
-save(example_data_ecuador, file="../SubnationalCRVS/src/example_data_ecuador.rda")
+                                "province_name_short"="cod_name_short") %>%
+                        select(province_name,
+                               province_name_short,
+                               sex,
+                               age,
+                               pop1,
+                               pop2,
+                               deaths,
+                               date1,
+                               date2)
+
+save(example_data_ecuador, file="../SubnationalCRVS/data/example_data_ecuador.rda")
 
 # ddm-ready dataset with 5-year age groups: Rabat
 example_data_rabat <- read.csv("data/data_for_ddm_rabat.csv", 
@@ -1470,10 +1480,20 @@ ecuador_age_tabulation <- left_join(ecuador_age_tabulation,
   rename("province_name"="cod_name",
          "province_name_short"="cod_name_short")
 ecuador_age_tabulation <- ecuador_age_tabulation %>% filter(is.na(province_name_short) == FALSE)
+ecuador_age_tabulation <- ecuador_age_tabulation %>%
+  select(province_name,
+       province_name_short,
+       sex,
+       age,
+       pop1,
+       pop2,
+       date1,
+       date2)
+
 save(ecuador_age_tabulation, 
-     file="../SubnationalCRVS/src/ecuador_age_tabulation.rda")
+     file="../SubnationalCRVS/data/ecuador_age_tabulation.rda")
 
 } else {
-  load("../SubnationalCRVS/src/ecuador_age_tabulation.rda")
+  load("../SubnationalCRVS/data/ecuador_age_tabulation.rda")
 }
 

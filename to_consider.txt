@@ -1,6 +1,7 @@
 - Ramoudane's idea: Cheat sheet for package -- starting with clean dataset then what?
 	- long-term perspective: how can they really use R in the future?
 	- repetitive tasks: R; one-time very case-specific (e.g. clean specific dataset): Excel, SPSS< whatever
+- *CITE SOUCES FOR DATA AND METHODS*
 - Add descriptions of values (i.e. objects returned) by all documented functions
 - write more "variable checks" functions in Helpers instead of performing checks within the other functions
 - Order the columns of all the datasets returned so they are qualitatively consistent and sensible to display on their own as tables

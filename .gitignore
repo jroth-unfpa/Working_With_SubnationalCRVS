@@ -2,7 +2,10 @@
 .git/
 
 # old versions
-*.~*
+*~*
+
+# notes to myself
+*to_consider*
 
 # output from debugging/testing
 Plots/
