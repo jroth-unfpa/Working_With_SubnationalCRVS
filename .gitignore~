@@ -2,7 +2,7 @@
 .git/
 
 # old versions
-*.~*
+*~*
 
 # output from debugging/testing
 Plots/
