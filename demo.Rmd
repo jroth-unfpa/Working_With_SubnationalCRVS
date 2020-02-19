@@ -194,6 +194,17 @@ ddm_results <- EstimateDDM(data=example_data_ecuador,
             max.age.in.search=75,
             min.number.of.ages=8)
 ```
+
+### View DDM point estimates in table 
+```{r "DDM_point_estimates_table", message=TRUE, warning=FALSE, eval=TRUE}
+head(ddm_results$ddm_estimates)
+```
+
+### View age-range sensitivity of DDM point estimates in table 
+```{r "DDM_sensitivity_estimates_table", message=TRUE, warning=FALSE, eval=TRUE}
+head(ddm_results$sensitivity_ddm_estimates)
+```
+
 ## Plot DDM estimates
 ```{r "plot_DDM", message=FALSE, warning=FALSE, eval=TRUE}
 PlotDDM(ddm_results=ddm_results,
@@ -201,21 +212,12 @@ PlotDDM(ddm_results=ddm_results,
         plots.dir="Plots/")
 ```
 
-### View DDM point estimates in table 
-```{r "DDM_point_estimates_table", message=TRUE, warning=FALSE, eval=TRUE}
-head(ddm_results$ddm_estimates)
-```
 ### View DDM point estimates in plot
 ```{r "DDM_point_estimates_in_plot", echo=TRUE, fig.cap="Point estimates of death registration completeness in Ecuador from 2001-2010, using the GGB-SEG method", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
                                    "ddm_point_estimates_combined_province_name_short_",
                                    Sys.Date(),
                                    ".pdf"))
-```
-
-### View age-range sensitivity of DDM point estimates in table 
-```{r "DDM_sensitivity_estimates_table", message=TRUE, warning=FALSE, eval=TRUE}
-head(ddm_results$sensitivity_ddm_estimates)
 ```
 
 ### View sensitivity of DDM point estimates in plot
