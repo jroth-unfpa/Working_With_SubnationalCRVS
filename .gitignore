@@ -2,10 +2,13 @@
 .git/
 
 # old versions
-*~*
+*.txt~*
+~*
+*~
 
 # notes to myself
 *to_consider*
+to_consider.txt
 
 # output from debugging/testing
 Plots/
