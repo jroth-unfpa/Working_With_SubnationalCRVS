@@ -4,6 +4,7 @@ author: "Jeremy Roth"
 date: ''
 output:
   pdf_document:
+    number_sections: yes
     toc: yes
   html_document:
     number_sections: yes
@@ -16,13 +17,17 @@ header-includes:
 rm(list=ls())
 ```
 
-# setting up
-## load SubnationalCRVS package (includes example data)
+# Set up
+## Load SubnationalCRVS package (includes example data)
 ```{r "load_package", message=FALSE, warning=FALSE}
+#library(devtools)
+#install_github("jroth-unfpa/SubnationalCRVS")
 library(SubnationalCRVS)
+head(ecuador_age_tabulation)
+head(example_data_ecuador)
 ```
 
-## additional settings for the demo
+## Initialize a few things for the demo
 ```{r "configure_demo", warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(dplyr)
@@ -31,7 +36,7 @@ my_plots_dir <- "Plots/"
 ```
 
 # Conduct DDQA
-## sex ratio
+## Sex ratio
 ```{r "sex_ratios", message=FALSE, warning=FALSE}
 s <- PlotSexRatios(data=example_data_ecuador,
                    name.disaggregations="province_name",
@@ -48,13 +53,13 @@ s <- PlotSexRatios(data=example_data_ecuador,
                    print.overall=FALSE,
                    plots.dir="Plots/")
 ```
-### view sex ratios in table
+### View sex ratios in table
 ```{r ¨sex_ratios_table"}
 s %>% select(province_name, age, pop1, pop2, sex_ratio_1, sex_ratio_2) %>%
       head()
 ```
 
-### view sex ratios in plot 
+### View sex ratios in plot 
 ```{r echo=FALSE, fig.cap="A caption", fig.align="center", fig.pos="H", out.width = "60%"}
 knitr::include_graphics(path=paste0(my_plots_dir,
                                    "sex_ratios_combined_province_name_",
@@ -62,7 +67,7 @@ knitr::include_graphics(path=paste0(my_plots_dir,
                                    ".pdf"))
 ```
 
-## age ratios
+## Age ratios
 ```{r "age_ratios", message=FALSE, warning=FALSE, eval=TRUE}
 a <- PlotAgeRatios(data=example_data_ecuador,
               name.disaggregations="province_name",
@@ -79,12 +84,12 @@ a <- PlotAgeRatios(data=example_data_ecuador,
               print.overall=FALSE,
               plots.dir="Plots/")
 ```
-### view age ratios in table
+### View age ratios in table
 ```{r "age_ratios_table"}
 a %>% select(province_name, age, pop1, pop2, age_ratio_1, age_ratio_2) %>%
       head()
 ```
-### view age ratios in plot
+### View age ratios in plot
 ```{r "age_ratios_in_plot", echo=FALSE, fig.cap="A caption", fig.align="center", fig.pos="H", out.width = "60%"}
 knitr::include_graphics(path=paste0(my_plots_dir,
                                    "age_ratios_combined_province_name_",
@@ -93,10 +98,10 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 
 ```
 
-## potential age heaping
+## Potential age heaping
 ```{r "age_heaping", message=FALSE, warning=FALSE, eval=TRUE}
- PlotPotentialAgeHeaping(data=ecuador_age_tabulation,
-              name.disaggregations="province_name",
+PlotPotentialAgeHeaping(data=ecuador_age_tabulation,
+            name.disaggregations="province_name",
               name.males="m",
               name.females="f",
               name.age="age",
@@ -110,10 +115,19 @@ knitr::include_graphics(path=paste0(my_plots_dir,
               plots.dir="Plots/")
 ```
 
-## age heaping scores
+### View potential age heaping plots
+```{r "potential_age_heaping_in_plot", echo=FALSE, fig.cap="A caption", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
+knitr::include_graphics(path=paste0(my_plots_dir,
+                                   "potential_age_heaping_by_province_name_",
+                                   Sys.Date(),
+                                   ".pdf"))
+
+```
+
+## Age heaping indices
 ```{r "age_heaping_scores", message=FALSE, warning=FALSE, eval=TRUE}
-ageheaping <- PlotAgeHeapingScores(data=ecuador_age_tabulation,
-                                      name.disaggregations="province_name_short",
+ageheaping_name_full <- PlotAgeHeapingScores(data=ecuador_age_tabulation,
+                                      name.disaggregations="province_name",
                                       name.males="m",
                                       name.females="f",
                                       name.age="age",
@@ -122,14 +136,53 @@ ageheaping <- PlotAgeHeapingScores(data=ecuador_age_tabulation,
                                       name.date2="date2",
                                       name.population.year1="pop1",
                                       name.population.year2="pop2",
+                                      print.plots=FALSE,
                                       plots.dir="Plots/")
-head(ageheaping)
+ageheaping_name_short <- PlotAgeHeapingScores(data=ecuador_age_tabulation,
+                                      name.disaggregations="province_name",
+                                      name.males="m",
+                                      name.females="f",
+                                      name.age="age",
+                                      name.sex="sex",
+                                      name.date1="date1",
+                                      name.date2="date2",
+                                      name.population.year1="pop1",
+                                      name.population.year2="pop2",
+                                      print.plots=FALSE,
+                                      plots.dir="Plots/")
+```
+### View age heaping indices in table
+```{r "age_heaping_indices_table"}head(example_data_ecuador)
+head(ageheaping_name_full)
+```
+### View age heaping indices in plots
+```{r "age_heaping_indices_in_plot", echo=FALSE, fig.cap="A caption", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
+knitr::include_graphics(path=paste0(my_plots_dir,
+                                   "age_heaping_scores_combined_province_name_short_",
+                                   Sys.Date(),
+                                   ".pdf"))
 ```
 
 # DDM estimation
-## computing DDM estimates
+## Compute DDM estimates
 ```{r "estimate_DDM", message=TRUE, warning=FALSE, eval=TRUE}
-ddm_results <- EstimateDDM(data=example_data_ecuador, 
+ddm_results_name_short <- EstimateDDM(data=example_data_ecuador, 
+            name.disaggregations="province_name_short",
+            name.age="age",
+            name.sex="sex",
+            name.males="m",
+            name.females="f",
+            name.date1="date1",
+            name.date2="date2",
+            name.population.year1="pop1",
+            name.population.year2="pop2",
+            name.deaths="deaths",
+            deaths.summed=TRUE,
+            min.age.in.search=15,
+            max.age.in.search=75,
+            min.number.of.ages=8)
+
+ddm_results_name_full <- EstimateDDM(data=example_data_ecuador, 
             name.disaggregations="province_name",
             name.age="age",
             name.sex="sex",
@@ -144,14 +197,40 @@ ddm_results <- EstimateDDM(data=example_data_ecuador,
             min.age.in.search=15,
             max.age.in.search=75,
             min.number.of.ages=8)
-head(ddm_results$ddm_estimates)
-head(ddm_results$sensitivity_ddm_estimates)
 ```
-## plotting DDM estimates
+## Plot DDM estimates
 ```{r "plot_DDM", message=FALSE, warning=FALSE, eval=TRUE}
-PlotDDM(ddm_results=ddm_results,
+PlotDDM(ddm_results=ddm_results_name_short,
         size.text.sensitivity=8,
         plots.dir="Plots/")
+PlotDDM(ddm_results=ddm_results_name_full,
+        size.text.sensitivity=8,
+        plots.dir="Plots/")
+```
+
+### View DDM point estimates in table 
+```{r "DDM_point_estimates_table", message=TRUE, warning=FALSE, eval=TRUE}
+head(ddm_results_name_full$ddm_estimates)
+```
+### View DDM point estimates in plot
+```{r "DDM_point_estimates_in_plot", echo=FALSE, fig.cap="A caption", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
+knitr::include_graphics(path=paste0(my_plots_dir,
+                                   "ddm_point_estimates_combined_province_name_short_",
+                                   Sys.Date(),
+                                   ".pdf"))
+```
+
+### View age-range sensitivity of DDM point estimates in table 
+```{r "DDM_sensitivity_estimates_table", message=TRUE, warning=FALSE, eval=TRUE}
+head(ddm_results_name_full$sensitivity_ddm_estimates)
+```
+
+### View sensitivity of DDM point estimates in plot
+```{r "DDM_sensitivity_estimates_in_plot", echo=FALSE, fig.cap="A caption", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
+knitr::include_graphics(path=paste0(my_plots_dir,
+                                   "ddm_sensitivity_province_name_",
+                                   Sys.Date(),
+                                   ".pdf"))
 ```
 
 
