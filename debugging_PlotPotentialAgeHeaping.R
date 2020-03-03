@@ -38,11 +38,12 @@ save.overall = TRUE
 save.name_overall = NULL
 fig.nrow.overall=2
 fig.ncol.overall=1
-mark_multiples_of_5 <- TRUE
+mark_multiples_of_5_disaggregated <- FALSE
+mark_multiples_of_5_overall <- TRUE
 
 ## testing
 PlotPotentialAgeHeaping(data=ecuador_age_tabulation,
-              name.disaggregations="province_name_short",
+              name.disaggregations="province_name",
               name.males="m",
               name.females="f",
               name.age="age",

@@ -15,21 +15,20 @@ rm(list=ls())
 ```
 
 # Set up
-## Load SubnationalCRVS package (includes example data)
 ```{r "load_package", message=FALSE, warning=FALSE}
 #library(devtools)
 #install_github("jroth-unfpa/SubnationalCRVS")
 library(SubnationalCRVS)
-head(ecuador_age_tabulation)
-head(example_data_ecuador)
+library(dplyr)
+my_plots_dir <- "Plots/"
+dir.create(my_plots_dir)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Initialize a few things for the demo
+# View the first few rows of the data
 ```{r "configure_demo", warning=FALSE, message=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(dplyr)
-library(knitr)
-my_plots_dir <- "Plots/"
+head(ecuador_age_tabulation)
+head(example_data_ecuador)
 ```
 
 # Conduct DDQA
@@ -208,7 +207,6 @@ head(ddm_results$sensitivity_ddm_estimates)
 ## Plot DDM estimates
 ```{r "plot_DDM", message=FALSE, warning=FALSE, eval=TRUE}
 PlotDDM(ddm_results=ddm_results,
-        size.text.sensitivity=8,
         plots.dir="Plots/")
 ```
 

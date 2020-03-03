@@ -1,0 +1,199 @@
+install.packages(c("tidyverse", "devtools", "ggpubr", "gridExtra"))
+install.packages("roxygen")
+install.packages("roxygen2")
+install.packages("xml2")
+install.packages("~/Downloads/xml2_1.2.2.tar.gz", repos = NULL, type = "source")
+library(devtools)
+install.packages("xml2")
+install.packages("devtools")
+install.packages("devtools")
+install.packages("devtools")
+install.packages("roxygen2")
+library(devtools)
+install_github("timriffe/DemoTools")
+install.packages("rstan")
+install.packages("https://win-builder.r-project.org/rTkumr03G8UM/rstan_2.19.1.zip", repos = NULL)
+install.packages("~/Downloads/rstan_2.19.2.tar.gz", repos = NULL, type = "source")
+install.packages("rstan")
+install.packages("rstan")
+install.packages("~/Downloads/rstan_2.14.1.tar.gz", repos = NULL, type = "source")
+install.packages("~/Downloads/rstan_2.15.1.tar.gz", repos = NULL, type = "source")
+install.packages("~/Downloads/rstan_2.17.2.tar.gz", repos = NULL, type = "source")
+install.packages("~/Downloads/rstan_2.18.1.tar.gz", repos = NULL, type = "source")
+install.packages("~/Downloads/rstan_2.8.0.tar.gz", repos = NULL, type = "source")
+install.packages("rstan")
+install.packages("rstan")
+install.packages("rstan")
+dotR <- file.path(Sys.getenv("HOME"), ".R")
+if (!file.exists(dotR))
+dir.create(dotR)
+M <- file.path(dotR, "Makevars.win")
+if (!file.exists(M))
+file.create(M)
+cat("\nCXX14FLAGS=-O3 -Wno-unused-variable -Wno-unused-function",
+"CXX14 = $(BINPREF)g++ -m$(WIN) -std=c++1y",
+"CXX11FLAGS=-O3 -Wno-unused-variable -Wno-unused-function",
+file = M, sep = "\n", append = TRUE)
+dotR <- file.path(Sys.getenv("HOME"), ".R")
+if (!file.exists(dotR))
+dir.create(dotR)
+M <- file.path(dotR, "Makevars.win")
+if (!file.exists(M))
+file.create(M)
+cat("\nCXX14FLAGS=-O3 -Wno-unused-variable -Wno-unused-function",
+"CXX14 = $(BINPREF)g++ -m$(WIN) -std=c++1y",
+"CXX11FLAGS=-O3 -Wno-unused-variable -Wno-unused-function",
+file = M, sep = "\n", append = TRUE)
+install.packages("rstan")
+dotr
+dotR <- file.path(Sys.getenv("HOME"), ".R")
+dotR
+if (!file.exists(dotR))
+dir.create(dotR)
+M <- file.path(dotR, "Makevars.win")
+if (!file.exists(M))
+file.create(M)
+writeLines(readLines(file.path(Sys.getenv("HOME"), ".R/Makevars")))
+library(devtools)
+install_github("timriffe/DemoTools")
+library(devtools)
+install_github("timriffe/DemoTools")
+install_github("timriffe/DemoTools")
+rstan::stan_version()
+install.packages("rstan")
+library(rstan)
+install_github("timriffe/DemoTools")
+library(devtools)
+install_github("timriffe/DemoTools")
+library(bayesTFR)
+setwd("~/Dropbox/Working_With_SubnationalCRVS")
+setwd("~/Dropbox/Working_With_SubnationalCRVS")
+# Chunk 1: "clear"
+rm(list=ls())
+# Chunk 2: "load_package"
+#library(devtools)
+#install_github("jroth-unfpa/SubnationalCRVS")
+library(SubnationalCRVS)
+head(ecuador_age_tabulation)
+head(example_data_ecuador)
+# Chunk 3: "configure_demo"
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(knitr)
+my_plots_dir <- "Plots/"
+# Chunk 4: "sex_ratios"
+s <- PlotSexRatios(data=example_data_ecuador,
+name.disaggregations="province_name",
+name.males="m",
+name.females="f",
+name.age="age",
+name.sex="sex",
+name.date1="date1",
+name.date2="date2",
+name.population.year1="pop1",
+name.population.year2="pop2",
+line.size.overall=0.6,
+print.disaggregated=FALSE,
+print.overall=FALSE,
+plots.dir="Plots/")
+# Chunk 5: ¨sex_ratios_table"
+s %>% select(province_name, age, pop1, pop2, sex_ratio_1, sex_ratio_2) %>%
+head()
+# Chunk 6: "plot_sex_ratio_combined"
+knitr::include_graphics(path=paste0(my_plots_dir,
+"sex_ratios_combined_province_name_",
+Sys.Date(),
+".pdf"))
+# Chunk 7: "plot_sex_ratio_disaggregated"
+knitr::include_graphics(path=paste0(my_plots_dir,
+"sex_ratios_by_province_name_",
+Sys.Date(),
+".pdf"))
+# Chunk 8: "age_ratios"
+a <- PlotAgeRatios(data=example_data_ecuador,
+name.disaggregations="province_name",
+name.males="m",
+name.females="f",
+name.age="age",
+name.sex="sex",
+name.date1="date1",
+name.date2="date2",
+name.population.year1="pop1",
+name.population.year2="pop2",
+line.size.overall=0.6,
+print.disaggregated=FALSE,
+print.overall=FALSE,
+plots.dir="Plots/")
+# Chunk 9: "age_ratios_table"
+a %>% select(province_name, age, pop1, pop2, age_ratio_1, age_ratio_2) %>%
+head()
+# Chunk 10: "plot_age_ratios_combined"
+knitr::include_graphics(path=paste0(my_plots_dir,
+"age_ratios_combined_province_name_",
+Sys.Date(),
+".pdf"))
+# Chunk 11: "plot_age_ratios_disaggreagted"
+knitr::include_graphics(path=paste0(my_plots_dir,
+"age_ratios_by_province_name_",
+Sys.Date(),
+".pdf"))
+# Chunk 12: "age_heaping"
+PlotPotentialAgeHeaping(data=ecuador_age_tabulation,
+name.disaggregations="province_name",
+name.males="m",
+name.females="f",
+name.age="age",
+name.sex="sex",
+name.date1="date1",
+name.date2="date2",
+name.population.year1="pop1",
+name.population.year2="pop2",
+print.disaggregated=FALSE,
+print.overall=FALSE,
+plots.dir="Plots/")
+# Chunk 13: "plot_age_heaping_combined"
+knitr::include_graphics(path=paste0(my_plots_dir,
+"potential_age_heaping_combined_province_name_",
+Sys.Date(),
+".pdf"))
+# Chunk 14: "plot_age_heaping_disaggregated"
+knitr::include_graphics(path=paste0(my_plots_dir,
+"potential_age_heaping_by_province_name_",
+Sys.Date(),
+".pdf"))
+# Chunk 15: "age_heaping_scores"
+ageheaping <- PlotAgeHeapingScores(data=ecuador_age_tabulation,
+name.disaggregations="province_name_short",
+name.males="m",
+name.females="f",
+name.age="age",
+name.sex="sex",
+name.date1="date1",
+name.date2="date2",
+name.population.year1="pop1",
+name.population.year2="pop2",
+print.plots=FALSE,
+plots.dir="Plots/")
+# Chunk 16: "age_heaping_indices_table"
+head(ageheaping)
+# Chunk 17: "plot_age_heaping_indices"
+knitr::include_graphics(path=paste0(my_plots_dir,
+"age_heaping_scores_combined_province_name_short_",
+Sys.Date(),
+".pdf"))
+# Chunk 18: "estimate_DDM"
+ddm_results <- EstimateDDM(data=example_data_ecuador,
+name.disaggregations="province_name_short",
+name.age="age",
+name.sex="sex",
+name.males="m",
+name.females="f",
+name.date1="date1",
+name.date2="date2",
+name.population.year1="pop1",
+name.population.year2="pop2",
+name.deaths="deaths",
+deaths.summed=TRUE,
+min.age.in.search=15,
+max.age.in.search=75,
+min.number.of.ages=8)
