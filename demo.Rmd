@@ -178,7 +178,7 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 ## Compute DDM estimates
 ```{r "estimate_DDM", message=TRUE, warning=FALSE, eval=TRUE}
 ddm_results <- EstimateDDM(data=example_data_ecuador, 
-            name.disaggregations="province_name_short",
+            name.disaggregations="province_name",
             name.age="age",
             name.sex="sex",
             name.males="m",
@@ -207,13 +207,15 @@ head(ddm_results$sensitivity_ddm_estimates)
 ## Plot DDM estimates
 ```{r "plot_DDM", message=FALSE, warning=FALSE, eval=TRUE}
 PlotDDM(ddm_results=ddm_results,
+        label.completeness="Estimated Completeness (%)",
+        label.subnational.levels="Province",
         plots.dir="Plots/")
 ```
 
 ### View DDM point estimates in plot
 ```{r "DDM_point_estimates_in_plot", echo=TRUE, fig.cap="Point estimates of death registration completeness in Ecuador from 2001-2010, using the GGB-SEG method", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
-                                   "ddm_point_estimates_combined_province_name_short_",
+                                   "ddm_point_estimates_combined_province_name_",
                                    Sys.Date(),
                                    ".pdf"))
 ```
@@ -221,7 +223,7 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 ### View sensitivity of DDM point estimates in plot
 ```{r "DDM_sensitivity_estimates_in_plot", echo=TRUE, fig.cap="Sensitivity of point estimates of death registration completeness in Ecuador from 2001-2010 to choice of age-range parameter in the GGB-SEG method", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
-                                   "ddm_sensitivity_province_name_short_",
+                                   "ddm_sensitivity_province_name_",
                                    Sys.Date(),
                                    ".pdf"))
 ```
