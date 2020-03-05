@@ -16,7 +16,7 @@ source("../SubnationalCRVS/R/PlotAgeHeapingScores.R")
 
 ## specify arguments
 data <- ecuador_age_tabulation
-name.disaggregations <- "province_name_short"
+name.disaggregations <- "province_name"
 name.males <- "m"
 name.females <- "f"
 name.age <- "age" 
@@ -44,7 +44,10 @@ fig.ncol <- 2
 print.plots <- TRUE
 save.plots <- TRUE
 save.name.plots <- NULL
-plots.dir <- ""
+plots.dir <- "Plots/"
+label.subnational.levels <- name.disaggregations
+base.size=12
+
 
 ## testing
 test_age_heaping <- ComputeAgeHeapingScores(data=ecuador_age_tabulation,
