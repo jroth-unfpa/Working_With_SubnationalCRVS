@@ -1,5 +1,5 @@
 ---
-title: "SubnationalCRVS Demo"
+title: "SubnationalCRVS R Package: Demo"
 author: "Jeremy Roth"
 date: ''
 output:
@@ -12,29 +12,71 @@ header-includes:
 
 ```{r "clear", include=FALSE}
 rm(list=ls())
-```
-
-# Set up
-```{r "load_package", message=FALSE, warning=FALSE}
-#library(devtools)
-#install_github("jroth-unfpa/SubnationalCRVS")
-library(SubnationalCRVS)
-library(dplyr)
-my_plots_dir <- "Plots/"
-dir.create(my_plots_dir)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# View the first few rows of the data
-```{r "configure_demo", warning=FALSE, message=FALSE}
-head(ecuador_age_tabulation)
-head(example_data_ecuador)
+# Setup
+Since the `SubnationalCRVS` package is still under active development, it is hosted on my GitHub page (`www.github.com/jroth-unfpa/SubnationalCRVS`) rather than on CRAN. As a result, `SubnationalCRVS` cannot be installed with the usual `install.packages()` function; instead, we install `SubnationalCRVS` with the `install.github()` function from the `devtools` package. The dependency `DemoTools` is also not hosted on CRAN and must be installed with `install.github()`.
+```{r "install_package", eval=FALSE}
+library(devtools)
+install_github("timriffe/DemoTools") # installing the DemoTools dependency (not on CRAN)
+install_github("jroth-unfpa/SubnationalCRVS") # installing the SubnationalCRVS package itself
+```
+Now we can load `SubnationalCRVS`, specify the name of the local folder in which we will save the plots, and create that local folder if it does not already exist.
+```{r "load_package", message=FALSE, warning=FALSE}
+library(SubnationalCRVS)
+my_plots_dir <- "Plots/" # local folder where the plots should be saved
+dir.create(my_plots_dir) # create the folder if it does not already exist
 ```
 
-# Conduct DDQA
-## Sex ratio
+We will also load the `dplyr` package to customize the display of some of the tables returned by `SunbationalCRVS`.
+```{r "load_dplyr", message=FALSE, warning=FALSE}
+library(dplyr)
+```
+
+# View the Example Datasets Included with the SubnationalCRVS Package
+The `SubnationalCRVS` package comes with two tabulations -- disaggregated by age, sex, and province -- created from publicly available datasets from Ecuador (LINKS), based on the country's 2001 Census, 2010 Census, and annual counts of registered deaths from 2001 through 2010. 
+
+```{r "ecuador_single_year_ages", echo=TRUE}
+head(ecuador_age_tabulation)
+```
+The `ecuador_age_tabulation` dataset reports the estimated populations in Ecuador  by single-year ages (0, 1, 2, ... in the `age` column) from both the 2001 Census (`pop1` column) and the 2010 Census (`pop2` column), separately for males and females (`m` and `f` in the `sex` column) and province (full name in the `province` column and abbreviated name in the `province_name_short` column).
+
+
+```{r "ecuador_five_year_ages", echo=TRUE}
+head(example_data_ecuador)
+```
+The `example_data_ecuador` dataset has the same variables as `ecuador_age_tabulation` with two exceptions: (1) the `age` variable now represents five-year age groups (in the `age` column, with 0-4 coded as 0, 5-9 coded as 5, 10-14 coded as 10, etc.) instead of single-year ages; and (2) there is an additional column called `deaths` that reports the registered deaths collected between 2001 and 2010.
+
+# Conduct Demographic Data Quality Assessment (DDQA)
+
+## Sex ratio: PlotSexRatios()
+One step in the demographic data quality assessment (DDQA) process is to use the `PlotSexRatios()` function in the `SubnationalCRVS` package to compute and plot sex ratios within each combination of province, sex, and single-year age for the 2001 and 2010 data stored in `ecuador_age_tabulation`.
+
+We must provide our tabulated data frame in the `data` argument of `PlotSexRatios()` and, additionally, we need to provide a few additional arguments to `PlotSexRations()` to describe the variable names and values in the dataset:
+
+- `name.disaggregations` is the name of variable representing the subnational disaggregation (apart from sex) in `data`. Here we specify `name.disaggregations="province_name"`.
+
+- `name.sex` is the name of variable representing sex. Here we specify `name.sex="sex"`
+
+- `name.age` is the name of variable representing age. Here we specify `name.age="age"`
+
+- `name.date1` is the name of variable that provides the data of the earlier of the two time periods. Here we specify `name.date1="date1"` (the value of this variable, `"2001-11-15"` is the date of Ecuador's 2001 Census)
+
+- `name.date2` is the name of variable that provides the data of the earlier of the two time periods. Here we specify `name.date1="date1"` (the value of this variable, `"2010-11-28"` is the date of Ecuador's 2010 Census)
+
+- `name.population.year1` is the name of variable representing the population in the earlier of the two time periods represented in the dataset. Here we specify `name.population.year2="pop1"`
+
+- `name.population.year2` is the name of variable representing the population in the earlier of the two time periods represented in the dataset. Here we specify `name.population.year2="pop2"`
+
+- `name.male` is the name of value of the `name.sex` variable that represents males
+
+- `name.female` is the name of value of the `name.sex` variable that represents females
+
+In addition, we specify the option argument `plots.dir=my_plots_dir` so that the plots will save in a local folder `Plots`; the default behavior would be to save the plots in the working directory of the R script.
+
 ```{r "sex_ratios", message=FALSE, warning=FALSE}
-s <- PlotSexRatios(data=example_data_ecuador,
+s <- PlotSexRatios(data=ecuador_age_tabulation,
                    name.disaggregations="province_name",
                    name.males="m",
                    name.females="f",
@@ -45,18 +87,12 @@ s <- PlotSexRatios(data=example_data_ecuador,
                    name.population.year1="pop1",
                    name.population.year2="pop2",
                    label.subnational.level="Province",
-                   line.size.overall=0.6,
-                   print.disaggregated=FALSE,
-                   print.overall=FALSE,
-                   plots.dir="Plots/")
+                   plots.dir=my_plots_dir)
 ```
-### View sex ratios in table
-```{r ¨sex_ratios_table"}
-s %>% select(province_name, age, pop1, pop2, sex_ratio_1, sex_ratio_2) %>%
-      head()
-```
+The plots of sex ratios are saved in the `Plots/` sub-folder we specified with the argument `plots.dir=my_plots_dir`; `plots.dir` is an optional argument and, if we do not specify a value for it, the plots will be saved the working directory. We also specified `label.subnational.level="Province"` so that the disaggregations are labeled `Province` instead of the less clear `province_name`.
 
 ### View sex ratios in combined plot 
+The sex ratios for all levels of subnational disaggregation are overlaid in the following "combined" plots separately for each data year.
 ```{r "plot_sex_ratio_combined", echo=TRUE, fig.cap="Sex ratios in Ecuador by province, combined plot", fig.align="center", fig.pos="H", out.width = "60%"}
 knitr::include_graphics(path=paste0(my_plots_dir,
                                    "sex_ratios_combined_province_name_",
@@ -65,14 +101,24 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 ```
 
 ### View sex ratios in disaggregated plots
+Additionally, the sex ratios are plotted in separate figures for each level of subnational disaggregation in the following "disaggregated" plots
 ```{r "plot_sex_ratio_disaggregated", echo=TRUE, fig.cap="Sex ratios in Ecuador by province, disaggregated plots", fig.align="center", fig.pos="H", out.width = "60%"}
 knitr::include_graphics(path=paste0(my_plots_dir,
                                    "sex_ratios_by_province_name_",
                                    Sys.Date(),
                                    ".pdf"))
+``` 
+
+### View sex ratios in table
+The object returned by `PlotSexRatios()` is a table that shows us the sex ratios for each combination of province, sex, and single-year age in the `sex_ratio_1` column (for the 2001 Census) and the `sex_ratio_2` column (for the 2010 Census).
+
+```{r ¨sex_ratios_table"}
+s %>% select(province_name, age, pop1, pop2, sex_ratio_1, sex_ratio_2) %>%
+      head()
 ```
 
-## Age ratios
+## Age ratios: PlotAgeRatios()
+Another step in our demographic data quality assessment is using the `PlotAgeRatios()` function in the `SubnationalCRVS` package to compute and plot age ratios within each combination of province and sex for the 2001 and 2010 data stored in `example_data_ecuador`.
 ```{r "age_ratios", message=FALSE, warning=FALSE, eval=TRUE}
 a <- PlotAgeRatios(data=example_data_ecuador,
               name.disaggregations="province_name",
@@ -85,17 +131,12 @@ a <- PlotAgeRatios(data=example_data_ecuador,
               name.population.year1="pop1",
               name.population.year2="pop2",
               label.subnational.level="Province",
-              line.size.overall=0.6,
-              print.disaggregated=FALSE,
-              print.overall=FALSE,
               plots.dir="Plots/")
 ```
-### View age ratios in table
-```{r "age_ratios_table"}
-a %>% select(province_name, age, pop1, pop2, age_ratio_1, age_ratio_2) %>%
-      head()
-```
+The arguments we provided to `PlotAgeRatios()` are actually identical to those we specified for `PlotSexRatios()`, except now we are using the tabulation with five-year age groups (`example_data_ecuador`) instead of the tabulation with single-year ages.
+
 ### View age ratios in combined plot
+The following "combined" plots, saved in the `Plots/` folder, show the age ratios for all levels of subnational disaggregation, separately for males and females in each data year.
 ```{r "plot_age_ratios_combined", echo=TRUE, fig.cap="Age ratios in Ecuador by province, combined plot", fig.align="center", fig.pos="H", out.width = "60%"}
 knitr::include_graphics(path=paste0(my_plots_dir,
                                    "age_ratios_combined_province_name_",
@@ -105,6 +146,8 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 ```
 
 ### View age ratios in disaggregated plots
+In addition, `PlotAgeRatios()` also creates the following "disaggregated" plots, saved in the `Plots/` folder, where the age ratios for each level of disaggregation are shown in separate plots, with different sexes and data years overlaid within each plot.
+
 ```{r "plot_age_ratios_disaggreagted", echo=TRUE, fig.cap="Age ratios in Ecuador by province, disaggregated plots", fig.align="center", fig.pos="H", out.width = "60%"}
 knitr::include_graphics(path=paste0(my_plots_dir,
                                    "age_ratios_by_province_name_",
@@ -113,7 +156,16 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 
 ```
 
-## Potential age heaping
+### View age ratios in table
+Just as the `PlotSexRatios()` function returns a table of disaggregated sex ratios, `PlotAgeRatios()` returns a table of disaggregated age ratios.
+```{r "age_ratios_table"}
+a %>% select(province_name, age, pop1, pop2, age_ratio_1, age_ratio_2) %>%
+      head()
+```
+
+## Potential age heaping: PlotPotentialAgeHeaping()
+To give us a sense of whether "age-heaping" is occurring within the levels of disaggregation present in our `ecuador_age_tabulation` dataset, we turn to the `PlotPotentialAgeHeaping()` function and actually provide the same arguments we used in the `PlotSexRatios()` function.
+
 ```{r "age_heaping", message=FALSE, warning=FALSE, eval=TRUE}
 PlotPotentialAgeHeaping(data=ecuador_age_tabulation,
             name.disaggregations="province_name",
@@ -126,12 +178,11 @@ PlotPotentialAgeHeaping(data=ecuador_age_tabulation,
               name.population.year1="pop1",
               name.population.year2="pop2",
               label.subnational.level="Province",
-              print.disaggregated=FALSE,
-              print.overall=FALSE,
               plots.dir="Plots/")
 ```
 
 ### View potential age heaping in combined plot
+The following "combined" plots show us estimated population counts by single-year ages with different provinces represented with different overlaid colors, and separate plots for each sex and data year.
 ```{r "plot_age_heaping_combined", echo=TRUE, fig.cap="Population counts in Ecuador by single-year age, combined plot", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
                                    "potential_age_heaping_combined_province_name_",
@@ -141,6 +192,7 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 ```
 
 ### View potential age heaping in disaggregated plots
+`PlotPotentialAgeHeaping()` present separate plots of population counts for each province in Ecuador, with different sexes and data years overlaid within each plot.
 ```{r "plot_age_heaping_disaggregated", echo=TRUE, fig.cap="Population counts in Ecuador by single-year age, disaggregated plots", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
                                    "potential_age_heaping_by_province_name_",
@@ -149,8 +201,9 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 
 ```
 
+## Age heaping indices: PlotAgeHeapingScores() 
+As a more concise summary of potential age-heaping suggested by the visualizations from `PlotPotentialAgeHeaping`, we now use the `PlotAgeHeapingScores` function with the same arguments we provided to the `PlotAgeRatios` function.
 
-## Age heaping indices
 ```{r "age_heaping_scores", message=FALSE, warning=FALSE, eval=TRUE}
 ageheaping <- PlotAgeHeapingScores(data=ecuador_age_tabulation,
                                       name.disaggregations="province_name",
@@ -163,14 +216,12 @@ ageheaping <- PlotAgeHeapingScores(data=ecuador_age_tabulation,
                                       name.population.year1="pop1",
                                       name.population.year2="pop2",
                                       label.subnational.levels="Province",
-                                      print.plots=FALSE,
                                       plots.dir="Plots/")
 ```
-### View age heaping indices in table
-```{r "age_heaping_indices_table"}
-head(ageheaping)
-```
+
 ### View age heaping indices in plots
+`PlotAgeHeapingScores` plots the values of three age-heaping indices within each combination of province, sex, and data year: Roughness, Whipple, and Myers. The indices are computed with the `DemoTools::check_heaping_roughness`, `DemoTools::check_heaping_Whipple`, and `DemoTools::check_heaping_myers` functions, respectively, from the `DemoTools` package.
+
 ```{r "plot_age_heaping_indices", echo=TRUE, fig.cap="Age heaping indices in Ecuador by province", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
                                    "age_heaping_scores_combined_province_name_",
@@ -178,8 +229,35 @@ knitr::include_graphics(path=paste0(my_plots_dir,
                                    ".pdf"))
 ```
 
-# DDM estimation
-## Compute DDM estimates
+We can also view the age-heaping indices in the table returned by `PlotAgeHeapingScores`
+
+### View age heaping indices in table
+```{r "age_heaping_indices_table"}
+head(ageheaping)
+```
+
+### View Noumbissi age-heaping indices: ComputeAgeHeapingScores()
+We can also use the `ComputeAgeHeapingScores` function -- which is called within `PlotAgeHeapingScores` -- with the optional argument `Noumbissi.display=TRUE` to view the Noumbissi index computed for single-year ages ending with 0, 1, 2,..., 9.
+
+```{r "age_heaping_Noumbissi", message=FALSE, warning=FALSE, eval=TRUE}
+ageheaping_with_Noumbissi <- ComputeAgeHeapingScores(data=ecuador_age_tabulation,
+                                      name.disaggregations="province_name",
+                                      name.males="m",
+                                      name.females="f",
+                                      name.age="age",
+                                      name.sex="sex",
+                                      name.date1="date1",
+                                      name.date2="date2",
+                                      name.population.year1="pop1",
+                                      name.population.year2="pop2",
+                                      Noumbissi.display=TRUE)
+head(ageheaping_with_Noumbissi)
+```
+
+# DDM Estimation of Death Registration Completeness
+The structure of the `example_data_ecuador` dataset is inspired by the requirements for the `DDM::ddm` function from the `DDM` package, which uses established Death Distribution Methods (DDM) to estimate death registration completeness between two consecutive Censuses. As a result, the `SubnationalCRVS` package offers the `EstimateDDM` function as a simple wrapper to `DDM::ddm` to perform DDM estimation of death registration completeness.
+
+## Compute DDM estimates: EstimateDDM
 ```{r "estimate_DDM", message=TRUE, warning=FALSE, eval=TRUE}
 ddm_results <- EstimateDDM(data=example_data_ecuador, 
             name.disaggregations="province_name",
@@ -192,23 +270,17 @@ ddm_results <- EstimateDDM(data=example_data_ecuador,
             name.population.year1="pop1",
             name.population.year2="pop2",
             name.deaths="deaths",
-            deaths.summed=TRUE,
-            min.age.in.search=15,
-            max.age.in.search=75,
-            min.number.of.ages=8)
+            deaths.summed=TRUE)
 ```
 
-### View DDM point estimates in table 
-```{r "DDM_point_estimates_table", message=TRUE, warning=FALSE, eval=TRUE}
-head(ddm_results$ddm_estimates)
-```
+We called `EstimateDDM` above using the same arguments as we used with `PlotAgeRatios`, with two additions: 
 
-### View age-range sensitivity of DDM point estimates in table 
-```{r "DDM_sensitivity_estimates_table", message=TRUE, warning=FALSE, eval=TRUE}
-head(ddm_results$sensitivity_ddm_estimates)
-```
+- `name.deaths` provides the name of the variable represented the count of registered deaths between the two dates represented in `name.date1` and `name.date2`
 
-## Plot DDM estimates
+- `deaths.summed`, which should be set to TRUE when the `name.deaths` variable represents the total number of registered deaths `name.date1` and `name.date2` and set to FALSE when the `name.deaths` variable represents the average number of registered deaths between the two dates.
+
+## Plot DDM estimates: PlotDDM()
+We can plot the estimated death registration completeness (using the "hybrid" GGB-SEG method) with the `PlotDDM` function:
 ```{r "plot_DDM", message=FALSE, warning=FALSE, eval=TRUE}
 PlotDDM(ddm_results=ddm_results,
         label.completeness="Estimated Completeness (%)",
@@ -216,7 +288,7 @@ PlotDDM(ddm_results=ddm_results,
         plots.dir="Plots/")
 ```
 
-### View DDM point estimates in plot
+### View estimates of death registration completeness in plot
 ```{r "DDM_point_estimates_in_plot", echo=TRUE, fig.cap="Point estimates of death registration completeness in Ecuador from 2001-2010, using the GGB-SEG method", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
                                    "ddm_point_estimates_combined_province_name_",
@@ -224,12 +296,29 @@ knitr::include_graphics(path=paste0(my_plots_dir,
                                    ".pdf"))
 ```
 
+
+### View DDM point estimates in table 
+The `EstimateDDM` function also returns a list, in which the `ddm_estimates` object contains the estimated death registration completeness with the GGB-SEG approach 
+```{r "DDM_point_estimates_table", message=TRUE, warning=FALSE, eval=TRUE}
+head(ddm_results$ddm_estimates)
+```
+
 ### View sensitivity of DDM point estimates in plot
+Additionally, `PlotDDM` presents a visualization of the GGB-SEG estimates of death-registration completeness to the all permitted values of the age range (i.e. sensitivity) that is selected `DDM::ddm()` as part of the fitting procedure underlying its estimation.
+
 ```{r "DDM_sensitivity_estimates_in_plot", echo=TRUE, fig.cap="Sensitivity of point estimates of death registration completeness in Ecuador from 2001-2010 to choice of age-range parameter in the GGB-SEG method", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
                                    "ddm_sensitivity_province_name_",
                                    Sys.Date(),
                                    ".pdf"))
 ```
+
+
+### View age-range sensitivity of DDM point estimates in table 
+The sensitivity estimates are also returned in table by `EstimateDDM`, in the `sensitivity_ddm_estimates` element of its list.
+```{r "DDM_sensitivity_estimates_table"}
+head(ddm_results$sensitivity_ddm_estimates, n=5)
+```
+
 
 
