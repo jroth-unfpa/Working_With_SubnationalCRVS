@@ -44,6 +44,7 @@ s <- PlotSexRatios(data=example_data_ecuador,
                    name.date2="date2",
                    name.population.year1="pop1",
                    name.population.year2="pop2",
+                   label.subnational.level="Province",
                    line.size.overall=0.6,
                    print.disaggregated=FALSE,
                    print.overall=FALSE,
@@ -83,6 +84,7 @@ a <- PlotAgeRatios(data=example_data_ecuador,
               name.date2="date2",
               name.population.year1="pop1",
               name.population.year2="pop2",
+              label.subnational.level="Province",
               line.size.overall=0.6,
               print.disaggregated=FALSE,
               print.overall=FALSE,
@@ -123,6 +125,7 @@ PlotPotentialAgeHeaping(data=ecuador_age_tabulation,
               name.date2="date2",
               name.population.year1="pop1",
               name.population.year2="pop2",
+              label.subnational.level="Province",
               print.disaggregated=FALSE,
               print.overall=FALSE,
               plots.dir="Plots/")
@@ -170,7 +173,7 @@ head(ageheaping)
 ### View age heaping indices in plots
 ```{r "plot_age_heaping_indices", echo=TRUE, fig.cap="Age heaping indices in Ecuador by province", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
-                                   "age_heaping_scores_combined_province_name_short_",
+                                   "age_heaping_scores_combined_province_name_",
                                    Sys.Date(),
                                    ".pdf"))
 ```
