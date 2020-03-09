@@ -38,20 +38,20 @@ library(dplyr)
 The `SubnationalCRVS` package comes with two tabulations -- disaggregated by age, sex, and province -- created from publicly available datasets from Ecuador (LINKS), based on the country's 2001 Census, 2010 Census, and annual counts of registered deaths from 2001 through 2010. 
 
 ```{r "ecuador_single_year_ages", echo=TRUE}
-head(ecuador_age_tabulation)
+head(ecuador_single_year_ages)
 ```
-The `ecuador_age_tabulation` dataset reports the estimated populations in Ecuador  by single-year ages (0, 1, 2, ... in the `age` column) from both the 2001 Census (`pop1` column) and the 2010 Census (`pop2` column), separately for males and females (`m` and `f` in the `sex` column) and province (full name in the `province` column and abbreviated name in the `province_name_short` column).
+The `ecuador_single_year_ages` dataset reports the estimated populations in Ecuador  by single-year ages (0, 1, 2, ... in the `age` column) from both the 2001 Census (`pop1` column) and the 2010 Census (`pop2` column), separately for males and females (`m` and `f` in the `sex` column) and province (full name in the `province` column and abbreviated name in the `province_name_short` column).
 
 
 ```{r "ecuador_five_year_ages", echo=TRUE}
-head(example_data_ecuador)
+head(ecuador_five_year_ages)
 ```
-The `example_data_ecuador` dataset has the same variables as `ecuador_age_tabulation` with two exceptions: (1) the `age` variable now represents five-year age groups (in the `age` column, with 0-4 coded as 0, 5-9 coded as 5, 10-14 coded as 10, etc.) instead of single-year ages; and (2) there is an additional column called `deaths` that reports the registered deaths collected between 2001 and 2010.
+The `ecuador_five_year_ages` dataset has the same variables as `ecuador_single_year_ages` with two exceptions: (1) the `age` variable now represents five-year age groups (in the `age` column, with 0-4 coded as 0, 5-9 coded as 5, 10-14 coded as 10, etc.) instead of single-year ages; and (2) there is an additional column called `deaths` that reports the registered deaths collected between 2001 and 2010.
 
 # Conduct Demographic Data Quality Assessment (DDQA)
 
 ## Sex ratio: PlotSexRatios()
-One step in the demographic data quality assessment (DDQA) process is to use the `PlotSexRatios()` function in the `SubnationalCRVS` package to compute and plot sex ratios within each combination of province, sex, and single-year age for the 2001 and 2010 data stored in `ecuador_age_tabulation`.
+One step in the demographic data quality assessment (DDQA) process is to use the `PlotSexRatios()` function in the `SubnationalCRVS` package to compute and plot sex ratios within each combination of province, sex, and single-year age for the 2001 and 2010 data stored in `ecuador_single_year_ages`.
 
 We must provide our tabulated data frame in the `data` argument of `PlotSexRatios()` and, additionally, we need to provide a few additional arguments to `PlotSexRations()` to describe the variable names and values in the dataset:
 
@@ -76,7 +76,7 @@ We must provide our tabulated data frame in the `data` argument of `PlotSexRatio
 In addition, we specify the option argument `plots.dir=my_plots_dir` so that the plots will save in a local folder `Plots`; the default behavior would be to save the plots in the working directory of the R script.
 
 ```{r "sex_ratios", message=FALSE, warning=FALSE}
-s <- PlotSexRatios(data=ecuador_age_tabulation,
+s <- PlotSexRatios(data=ecuador_single_year_ages,
                    name.disaggregations="province_name",
                    name.males="m",
                    name.females="f",
@@ -118,9 +118,9 @@ s %>% select(province_name, age, pop1, pop2, sex_ratio_1, sex_ratio_2) %>%
 ```
 
 ## Age ratios: PlotAgeRatios()
-Another step in our demographic data quality assessment is using the `PlotAgeRatios()` function in the `SubnationalCRVS` package to compute and plot age ratios within each combination of province and sex for the 2001 and 2010 data stored in `example_data_ecuador`.
+Another step in our demographic data quality assessment is using the `PlotAgeRatios()` function in the `SubnationalCRVS` package to compute and plot age ratios within each combination of province and sex for the 2001 and 2010 data stored in `ecuador_five_year_ages`.
 ```{r "age_ratios", message=FALSE, warning=FALSE, eval=TRUE}
-a <- PlotAgeRatios(data=example_data_ecuador,
+a <- PlotAgeRatios(data=ecuador_five_year_ages,
               name.disaggregations="province_name",
               name.males="m",
               name.females="f",
@@ -133,7 +133,7 @@ a <- PlotAgeRatios(data=example_data_ecuador,
               label.subnational.level="Province",
               plots.dir="Plots/")
 ```
-The arguments we provided to `PlotAgeRatios()` are actually identical to those we specified for `PlotSexRatios()`, except now we are using the tabulation with five-year age groups (`example_data_ecuador`) instead of the tabulation with single-year ages.
+The arguments we provided to `PlotAgeRatios()` are actually identical to those we specified for `PlotSexRatios()`, except now we are using the tabulation with five-year age groups (`ecuador_five_year_ages`) instead of the tabulation with single-year ages.
 
 ### View age ratios in combined plot
 The following "combined" plots, saved in the `Plots/` folder, show the age ratios for all levels of subnational disaggregation, separately for males and females in each data year.
@@ -164,10 +164,10 @@ a %>% select(province_name, age, pop1, pop2, age_ratio_1, age_ratio_2) %>%
 ```
 
 ## Potential age heaping: PlotPotentialAgeHeaping()
-To give us a sense of whether "age-heaping" is occurring within the levels of disaggregation present in our `ecuador_age_tabulation` dataset, we turn to the `PlotPotentialAgeHeaping()` function and actually provide the same arguments we used in the `PlotSexRatios()` function.
+To give us a sense of whether "age-heaping" is occurring within the levels of disaggregation present in our `ecuador_single_year_ages` dataset, we turn to the `PlotPotentialAgeHeaping()` function and actually provide the same arguments we used in the `PlotSexRatios()` function.
 
 ```{r "age_heaping", message=FALSE, warning=FALSE, eval=TRUE}
-PlotPotentialAgeHeaping(data=ecuador_age_tabulation,
+PlotPotentialAgeHeaping(data=ecuador_single_year_ages,
             name.disaggregations="province_name",
               name.males="m",
               name.females="f",
@@ -205,7 +205,7 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 As a more concise summary of potential age-heaping suggested by the visualizations from `PlotPotentialAgeHeaping`, we now use the `PlotAgeHeapingScores` function with the same arguments we provided to the `PlotAgeRatios` function.
 
 ```{r "age_heaping_scores", message=FALSE, warning=FALSE, eval=TRUE}
-ageheaping <- PlotAgeHeapingScores(data=ecuador_age_tabulation,
+ageheaping <- PlotAgeHeapingScores(data=ecuador_single_year_ages,
                                       name.disaggregations="province_name",
                                       name.males="m",
                                       name.females="f",
@@ -240,7 +240,7 @@ head(ageheaping)
 We can also use the `ComputeAgeHeapingScores` function -- which is called within `PlotAgeHeapingScores` -- with the optional argument `Noumbissi.display=TRUE` to view the Noumbissi index computed for single-year ages ending with 0, 1, 2,..., 9.
 
 ```{r "age_heaping_Noumbissi", message=FALSE, warning=FALSE, eval=TRUE}
-ageheaping_with_Noumbissi <- ComputeAgeHeapingScores(data=ecuador_age_tabulation,
+ageheaping_with_Noumbissi <- ComputeAgeHeapingScores(data=ecuador_single_year_ages,
                                       name.disaggregations="province_name",
                                       name.males="m",
                                       name.females="f",
@@ -255,11 +255,11 @@ head(ageheaping_with_Noumbissi)
 ```
 
 # DDM Estimation of Death Registration Completeness
-The structure of the `example_data_ecuador` dataset is inspired by the requirements for the `DDM::ddm` function from the `DDM` package, which uses established Death Distribution Methods (DDM) to estimate death registration completeness between two consecutive Censuses. As a result, the `SubnationalCRVS` package offers the `EstimateDDM` function as a simple wrapper to `DDM::ddm` to perform DDM estimation of death registration completeness.
+The structure of the `ecuador_five_year_ages` dataset is inspired by the requirements for the `DDM::ddm` function from the `DDM` package, which uses established Death Distribution Methods (DDM) to estimate death registration completeness between two consecutive Censuses. As a result, the `SubnationalCRVS` package offers the `EstimateDDM` function as a simple wrapper to `DDM::ddm` to perform DDM estimation of death registration completeness.
 
 ## Compute DDM estimates: EstimateDDM
 ```{r "estimate_DDM", message=TRUE, warning=FALSE, eval=TRUE}
-ddm_results <- EstimateDDM(data=example_data_ecuador, 
+ddm_results <- EstimateDDM(data=ecuador_five_year_ages, 
             name.disaggregations="province_name",
             name.age="age",
             name.sex="sex",
