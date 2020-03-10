@@ -328,7 +328,7 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 ### View age-range sensitivity of DDM point estimates in table 
 The sensitivity estimates are also returned in table by `EstimateDDM`, in the `sensitivity_ddm_estimates` element of its list.
 ```{r "DDM_sensitivity_estimates_table"}
-head(ddm_results$sensitivity_ddm_estimates, n=5)
+head(ddm_results$sensitivity_ggbseg_estimates, n=5)
 ```
 
 
