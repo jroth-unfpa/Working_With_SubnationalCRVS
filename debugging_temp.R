@@ -4,6 +4,7 @@ library(ggplot2)
 library(scales)
 library(DDM)
 library(ggpubr)
+library(DemoTools)
 source("~/Dropbox/SubnationalCRVS/R/Helpers.R")
 
 
@@ -16,7 +17,7 @@ counts_five <- ecuador_five_year_ages %>% group_by(province_name) %>%
                            summarize("n_year1"=sum(pop1),
                                      "n_year2"=sum(pop2))
 # debugging
-data <- ecuador_five_year_ages
+data <- ecuador_single_year_ages
 name.disaggregations <- "province_name"
 name.males <- "m"
 name.females <- "f"
