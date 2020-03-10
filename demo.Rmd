@@ -311,7 +311,7 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 ### View DDM point estimates in table 
 The `EstimateDDM` function also returns a list, in which the `ddm_estimates` object contains the estimated death registration completeness with the GGB-SEG approach 
 ```{r "DDM_point_estimates_table", message=TRUE, warning=FALSE, eval=TRUE}
-head(ddm_results$ddm_estimates)
+head(ddm_results$ggbseg_estimates)
 ```
 
 ### View sensitivity of DDM point estimates in plot
