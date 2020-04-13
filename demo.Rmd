@@ -131,7 +131,7 @@ s %>% select(province_name, age, pop1, pop2, sex_ratio_1, sex_ratio_2) %>%
 ## Age ratios: PlotAgeRatios()
 Another step in our demographic data quality assessment is using the `PlotAgeRatios()` function in the `SubnationalCRVS` package to compute and plot age ratios within each combination of province and sex for the 2001 and 2010 data stored in `ecuador_five_year_ages`.
 ```{r "age_ratios", message=FALSE, warning=FALSE, eval=TRUE}
-a <- PlotAgeRatios(data=ecuador_five_year_ages,
+a <- PlotAgeRatios(data=ecuador_five_year_ages_combined,
               name.disaggregations="province_name",
               name.males="m",
               name.females="f",
@@ -142,8 +142,9 @@ a <- PlotAgeRatios(data=ecuador_five_year_ages,
               name.population.year1="pop1",
               name.population.year2="pop2",
               label.subnational.level="Province",
-              plots.dir="Plots/")
-```
+              name.national="National",
+              plots.dir=my_plots_dir)
+  ```
 The arguments we provided to `PlotAgeRatios()` are actually identical to those we specified for `PlotSexRatios()`, except now we are using the tabulation with five-year age groups (`ecuador_five_year_ages`) instead of the tabulation with single-year ages.
 
 ### View age ratios in combined plot
@@ -189,7 +190,7 @@ PlotPotentialAgeHeaping(data=ecuador_single_year_ages,
               name.population.year1="pop1",
               name.population.year2="pop2",
               label.subnational.level="Province",
-              plots.dir="Plots/")
+              plots.dir=my_plots_dir)
 ```
 
 ### View potential age heaping in combined plot
@@ -227,7 +228,7 @@ ageheaping <- PlotAgeHeapingScores(data=ecuador_single_year_ages,
                                       name.population.year1="pop1",
                                       name.population.year2="pop2",
                                       label.subnational.levels="Province",
-                                      plots.dir="Plots/")
+                                      plots.dir=my_plots_dir)
 ```
 
 ### View age heaping indices in plots
@@ -296,13 +297,13 @@ We can plot the estimated death registration completeness (using the "hybrid" GG
 PlotDDM(ddm_results=ddm_results,
         label.completeness="Estimated Completeness (%)",
         label.subnational.levels="Province",
-        plots.dir="Plots/")
+        plots.dir=my_plots_dir)
 ```
 
 ### View estimates of death registration completeness in plot
 ```{r "DDM_point_estimates_in_plot", echo=TRUE, fig.cap="Point estimates of death registration completeness in Ecuador from 2001-2010, using the GGB-SEG method", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
-                                   "ddm_point_estimates_combined_province_name_",
+                                   "ggbseg_point_estimates_combined_province_name_",
                                    Sys.Date(),
                                    ".pdf"))
 ```
@@ -319,7 +320,7 @@ Additionally, `PlotDDM` presents a visualization of the GGB-SEG estimates of dea
 
 ```{r "DDM_sensitivity_estimates_in_plot", echo=TRUE, fig.cap="Sensitivity of point estimates of death registration completeness in Ecuador from 2001-2010 to choice of age-range parameter in the GGB-SEG method", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
-                                   "ddm_sensitivity_province_name_",
+                                   "ggbseg_sensitivity_province_name_",
                                    Sys.Date(),
                                    ".pdf"))
 ```

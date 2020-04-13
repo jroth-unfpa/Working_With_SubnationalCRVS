@@ -29,6 +29,33 @@ ecuador_five_year_ages <- example_data_ecuador %>%
 rm(example_data_ecuador)
 save(ecuador_five_year_ages, file="../SubnationalCRVS/data/ecuador_five_year_ages.rda")
 
+## also save national-level datasets (both appended to the subnational dataset and separately)
+### separate
+load("data/SRECUADORNAC.Rda")
+ecuador_five_year_ages_national <- SRECUADORNAC
+ecuador_five_year_ages_national$province_name <- "National"
+ecuador_five_year_ages_national$province_name_short <- "Nat"
+ecuador_five_year_ages_national$date1 <- as.character(ecuador_five_year_ages_national$date1)
+ecuador_five_year_ages_national$date2 <- as.character(ecuador_five_year_ages_national$date2)
+ecuador_five_year_ages_national <- ecuador_five_year_ages_national %>%
+                                   select(province_name,
+                                          province_name_short,
+                                          sex,
+                                          age,
+                                          pop1,
+                                          pop2,
+                                          deaths,
+                                          date1,
+                                          date2)
+save(ecuador_five_year_ages_national, 
+    file="../SubnationalCRVS/data/ecuador_five_year_ages_national.rda")
+### combined with subnational results
+ecuador_five_year_ages_combined <- rbind(ecuador_five_year_ages,
+                                         ecuador_five_year_ages_national)
+save(ecuador_five_year_ages_combined, 
+     file="../SubnationalCRVS/data/ecuador_five_year_ages_combined.rda")
+
+
 # ddm-ready dataset with 5-year age groups: Rabat
 example_data_rabat <- read.csv("data/data_for_ddm_rabat.csv", 
                                  header=TRUE, stringsAsFactors=FALSE)
