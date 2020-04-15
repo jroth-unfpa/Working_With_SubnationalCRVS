@@ -5,6 +5,7 @@ library(scales)
 library(DDM)
 library(ggpubr)
 library(DemoTools)
+library(gridExtra)
 source("~/Dropbox/SubnationalCRVS/R/Helpers.R")
 
 # national-level stuff
@@ -33,7 +34,7 @@ ecuador_five_year_ages_with_national <- rbind(a,
                                               ecuador_five_year_ages)
 
 # debugging
-data <- ecuador_five_year_ages_with_national
+data <- ecuador_five_year_ages_combined
 name.disaggregations <- "province_name"
 name.males <- "m"
 name.females <- "f"
@@ -46,7 +47,7 @@ name.date2 <- "date2"
 name.deaths <- "deaths"
 ylim.disaggregated <- NULL
 separate.national <- TRUE
-name.national <- "National"
+name.national <- "National" #NULL
 line.size.overall=0.8
 fig.nrow.disaggregated=3
 fig.ncol.disaggregated=2
@@ -66,6 +67,8 @@ save.overall=TRUE
 save.name.overall=NULL
 plots.dir="Plots/"
 label.subnational.level = "Province"
+fig.nrow=3
+fig.ncol=2
 
 label.completeness = "Completeness"
 base.size.point.estimates = 12

@@ -87,7 +87,7 @@ c_s <- ComputeSexRatios(data=ecuador_single_year_ages,
                    name.population.year1="pop1",
                    name.population.year2="pop2")
 
-s <- PlotSexRatios(data=ecuador_single_year_ages,
+s <- PlotSexRatios(data=ecuador_five_year_ages_combined,
                    name.disaggregations="province_name",
                    name.males="m",
                    name.females="f",
@@ -97,6 +97,7 @@ s <- PlotSexRatios(data=ecuador_single_year_ages,
                    name.date2="date2",
                    name.population.year1="pop1",
                    name.population.year2="pop2",
+                   name.national="National",
                    label.subnational.level="Province",
                    plots.dir=my_plots_dir)
 ```
@@ -144,7 +145,7 @@ a <- PlotAgeRatios(data=ecuador_five_year_ages_combined,
               label.subnational.level="Province",
               name.national="National",
               plots.dir=my_plots_dir)
-  ```
+```
 The arguments we provided to `PlotAgeRatios()` are actually identical to those we specified for `PlotSexRatios()`, except now we are using the tabulation with five-year age groups (`ecuador_five_year_ages`) instead of the tabulation with single-year ages.
 
 ### View age ratios in combined plot
@@ -283,7 +284,7 @@ ddm_results <- EstimateDDM(data=ecuador_five_year_ages,
             name.population.year2="pop2",
             name.deaths="deaths",
             deaths.summed=TRUE)
-```
+````
 
 We called `EstimateDDM` above using the same arguments as we used with `PlotAgeRatios`, with two additions: 
 

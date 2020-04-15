@@ -1517,10 +1517,29 @@ ecuador_single_year_ages <- ecuador_age_tabulation %>%
        date1,
        date2)
 
+## sum across provinces to approximate national-level totals
+ecuador_single_year_ages_national <- ecuador_single_year_ages %>%
+      group_by(sex, age) %>%
+      mutate("pop1"=sum(pop1),
+             "pop2"=sum(pop2)) %>%
+      filter(province_name == "Azuay") %>%
+      as.data.frame()
+ecuador_single_year_ages_national$province_name <- "National"
+ecuador_single_year_ages_national$province_name_short <- "Nat"
+
+ecuador_single_year_ages_combined <- rbind(ecuador_single_year_ages, 
+                                           ecuador_single_year_ages_national)
+
 save(ecuador_single_year_ages, 
      file="../SubnationalCRVS/data/ecuador_single_year_ages.rda")
+save(ecuador_single_year_ages_national, 
+     file="../SubnationalCRVS/data/ecuador_single_year_ages_national.rda")
+save(ecuador_single_year_ages_combined, 
+     file="../SubnationalCRVS/data/ecuador_single_year_ages_combined.rda")
 
 } else {
   load("../SubnationalCRVS/data/ecuador_single_year_ages.rda")
+  load("../SubnationalCRVS/data/ecuador_single_year_ages_national.rda")
+  load("../SubnationalCRVS/data/ecuador_single_year_ages_combined.rda")
 }
 
