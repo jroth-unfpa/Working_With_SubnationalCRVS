@@ -87,7 +87,7 @@ c_s <- ComputeSexRatios(data=ecuador_single_year_ages,
                    name.population.year1="pop1",
                    name.population.year2="pop2")
 
-s <- PlotSexRatios(data=ecuador_five_year_ages_combined,
+s <- PlotSexRatios(data=ecuador_single_year_ages_combined,
                    name.disaggregations="province_name",
                    name.males="m",
                    name.females="f",
@@ -180,7 +180,7 @@ a %>% select(province_name, age, pop1, pop2, age_ratio_1, age_ratio_2) %>%
 To give us a sense of whether "age-heaping" is occurring within the levels of disaggregation present in our `ecuador_single_year_ages` dataset, we turn to the `PlotPotentialAgeHeaping()` function and actually provide the same arguments we used in the `PlotSexRatios()` function.
 
 ```{r "age_heaping", message=FALSE, warning=FALSE, eval=TRUE}
-PlotPotentialAgeHeaping(data=ecuador_single_year_ages,
+PlotPotentialAgeHeaping(data=ecuador_single_year_ages_combined,
             name.disaggregations="province_name",
               name.males="m",
               name.females="f",
@@ -190,6 +190,7 @@ PlotPotentialAgeHeaping(data=ecuador_single_year_ages,
               name.date2="date2",
               name.population.year1="pop1",
               name.population.year2="pop2",
+              name.national="National",
               label.subnational.level="Province",
               plots.dir=my_plots_dir)
 ```

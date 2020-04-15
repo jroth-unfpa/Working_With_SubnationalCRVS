@@ -34,7 +34,7 @@ ecuador_five_year_ages_with_national <- rbind(a,
                                               ecuador_five_year_ages)
 
 # debugging
-data <- ecuador_five_year_ages_combined
+data <- ecuador_single_year_ages_combined
 name.disaggregations <- "province_name"
 name.males <- "m"
 name.females <- "f"
@@ -69,6 +69,9 @@ plots.dir="Plots/"
 label.subnational.level = "Province"
 fig.nrow=3
 fig.ncol=2
+confirm_single_year_ages=FALSE
+mark_multiples_of_5_disaggregated=FALSE
+mark_multiples_of_5_overall=TRUE
 
 label.completeness = "Completeness"
 base.size.point.estimates = 12
