@@ -6,6 +6,7 @@ library(DDM)
 library(ggpubr)
 library(DemoTools)
 library(gridExtra)
+library(reshape2)
 source("~/Dropbox/SubnationalCRVS/R/Helpers.R")
 
 # national-level stuff
@@ -72,6 +73,16 @@ fig.ncol=2
 confirm_single_year_ages=FALSE
 mark_multiples_of_5_disaggregated=FALSE
 mark_multiples_of_5_overall=TRUE
+show.size.population=TRUE
+roughness.age.min=NULL
+roughness.age.max=NULL
+Whipple.age.min=NULL
+Whipple.age.max=NULL
+Whipple.digit=NULL
+Myers.age.min=NULL
+Myers.age.max=NULL
+base.size=12
+
 
 label.completeness = "Completeness"
 base.size.point.estimates = 12

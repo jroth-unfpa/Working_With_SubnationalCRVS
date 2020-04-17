@@ -229,7 +229,8 @@ ageheaping <- PlotAgeHeapingScores(data=ecuador_single_year_ages,
                                       name.date2="date2",
                                       name.population.year1="pop1",
                                       name.population.year2="pop2",
-                                      label.subnational.levels="Province",
+                                      name.national="National",
+                                      label.subnational.level="Province",
                                       plots.dir=my_plots_dir)
 ```
 
@@ -285,7 +286,7 @@ ddm_results <- EstimateDDM(data=ecuador_five_year_ages,
             name.population.year2="pop2",
             name.deaths="deaths",
             deaths.summed=TRUE)
-````
+```
 
 We called `EstimateDDM` above using the same arguments as we used with `PlotAgeRatios`, with two additions: 
 
