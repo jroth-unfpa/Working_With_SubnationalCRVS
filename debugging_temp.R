@@ -99,11 +99,18 @@ life.expectancy.in.open.group=NULL
 
 
 
-date.1 <- NULL
-date.2 <- NULL
 
-
-
+base.size.point.estimates=13
+base.size.sensitivity=9
+fig.nrow=2
+fig.ncol=1
+show.lines.sex.differential=TRUE
+show.size.population=TRUE
+label.completeness="Estimated death registration completeness (GGB-SEG)"
+label.subnational.levels=ddm_results$name_disaggregations
+save.name.plot.point.estimates=NULL
+save.name.plots.sensitivity=NULL
+plots.dir=my_plots_dir
 
 
 

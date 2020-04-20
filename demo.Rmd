@@ -219,7 +219,7 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 As a more concise summary of potential age-heaping suggested by the visualizations from `PlotPotentialAgeHeaping`, we now use the `PlotAgeHeapingScores` function with the same arguments we provided to the `PlotAgeRatios` function.
 
 ```{r "age_heaping_scores", message=FALSE, warning=FALSE, eval=TRUE}
-ageheaping <- PlotAgeHeapingScores(data=ecuador_single_year_ages,
+ageheaping <- PlotAgeHeapingScores(data=ecuador_single_year_ages_combined,
                                       name.disaggregations="province_name",
                                       name.males="m",
                                       name.females="f",
@@ -255,7 +255,7 @@ head(ageheaping)
 We can also use the `ComputeAgeHeapingScores` function -- which is called within `PlotAgeHeapingScores` -- with the optional argument `Noumbissi.display=TRUE` to view the Noumbissi index computed for single-year ages ending with 0, 1, 2,..., 9.
 
 ```{r "age_heaping_Noumbissi", message=FALSE, warning=FALSE, eval=TRUE}
-ageheaping_with_Noumbissi <- ComputeAgeHeapingScores(data=ecuador_single_year_ages,
+ageheaping_with_Noumbissi <- ComputeAgeHeapingScores(data=ecuador_single_year_ages_combined,
                                       name.disaggregations="province_name",
                                       name.males="m",
                                       name.females="f",
@@ -274,7 +274,7 @@ The structure of the `ecuador_five_year_ages` dataset is inspired by the require
 
 ## Compute DDM estimates: EstimateDDM()
 ```{r "estimate_DDM", message=TRUE, warning=FALSE, eval=TRUE}
-ddm_results <- EstimateDDM(data=ecuador_five_year_ages, 
+ddm_results <- EstimateDDM(data=ecuador_five_year_ages_combined, 
             name.disaggregations="province_name",
             name.age="age",
             name.sex="sex",
@@ -284,6 +284,7 @@ ddm_results <- EstimateDDM(data=ecuador_five_year_ages,
             name.date2="date2",
             name.population.year1="pop1",
             name.population.year2="pop2",
+            name.national="National",
             name.deaths="deaths",
             deaths.summed=TRUE)
 ```
