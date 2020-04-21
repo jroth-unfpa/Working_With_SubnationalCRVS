@@ -76,7 +76,7 @@ We must provide our tabulated data frame in the `data` argument of `PlotSexRatio
 In addition, we specify the option argument `plots.dir=my_plots_dir` so that the plots will save in a local folder `Plots`; the default behavior would be to save the plots in the working directory of the R script.
 
 ```{r "sex_ratios", message=FALSE, warning=FALSE}
-c_s <- ComputeSexRatios(data=ecuador_single_year_ages,
+c_s <- ComputeSexRatios(data=ecuador_single_year_ages_combined,
                    name.disaggregations="province_name",
                    name.males="m",
                    name.females="f",
