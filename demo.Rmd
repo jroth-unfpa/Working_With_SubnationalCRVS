@@ -193,7 +193,7 @@ PlotPotentialAgeHeaping(data=ecuador_single_year_ages_combined,
               name.national="National",
               label.subnational.level="Province",
               plots.dir=my_plots_dir)
-```
+  ```
 
 ### View potential age heaping in combined plot
 The following "combined" plots show us estimated population counts by single-year ages with different provinces represented with different overlaid colors, and separate plots for each sex and data year.
@@ -270,7 +270,7 @@ head(ageheaping_with_Noumbissi)
 ```
 
 # DDM Estimation of Death Registration Completeness
-The structure of the `ecuador_five_year_ages` dataset is inspired by the requirements for the `DDM::ddm` function from the `DDM` package, which uses established Death Distribution Methods (DDM) to estimate death registration completeness between two consecutive Censuses. As a result, the `SubnationalCRVS` package offers the `EstimateDDM` function as a simple wrapper to `DDM::ddm` to perform DDM estimation of death registration completeness.
+The structure of the `ecuador_five_year_ages` dataset is inspired by the requirements for the `DDM::ddm` function from the `DDM` package, which uses established Death Distribution Methods (DDM) to estimate death registration completeness for adults (aged 15+) between two consecutive Censuses. As a result, the `SubnationalCRVS` package offers the `EstimateDDM` function as a simple wrapper to `DDM::ddm` to perform DDM estimation of death registration completeness.
 
 ## Compute DDM estimates: EstimateDDM()
 ```{r "estimate_DDM", message=TRUE, warning=FALSE, eval=TRUE}
@@ -296,10 +296,10 @@ We called `EstimateDDM` above using the same arguments as we used with `PlotAgeR
 - `deaths.summed`, which should be set to TRUE when the `name.deaths` variable represents the total number of registered deaths `name.date1` and `name.date2` and set to FALSE when the `name.deaths` variable represents the average number of registered deaths between the two dates.
 
 ## Plot DDM estimates: PlotDDM()
-We can plot the estimated death registration completeness (using the "hybrid" GGB-SEG method) with the `PlotDDM` function:
+We can plot the estimated adult death registration completeness (using the "hybrid" GGB-SEG method) with the `PlotDDM` function:
 ```{r "plot_DDM", message=FALSE, warning=FALSE, eval=TRUE}
 PlotDDM(ddm_results=ddm_results,
-        label.completeness="Estimated Completeness (%)",
+        label.completeness="Estimated Adult Death Registration Completeness (%)",
         label.subnational.levels="Province",
         plots.dir=my_plots_dir)
 ```
@@ -320,7 +320,7 @@ head(ddm_results$ggbseg_estimates)
 ```
 
 ### View sensitivity of DDM point estimates in plot
-Additionally, `PlotDDM` presents a visualization of the GGB-SEG estimates of death-registration completeness to the all permitted values of the age range (i.e. sensitivity) that is selected `DDM::ddm()` as part of the fitting procedure underlying its estimation.
+Additionally, `PlotDDM` presents a visualization of the GGB-SEG estimates of adult death-registration completeness to the all permitted values of the age range (i.e. sensitivity) that is selected `DDM::ddm()` as part of the fitting procedure underlying its estimation.
 
 ```{r "DDM_sensitivity_estimates_in_plot", echo=TRUE, fig.cap="Sensitivity of point estimates of death registration completeness in Ecuador from 2001-2010 to choice of age-range parameter in the GGB-SEG method", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
