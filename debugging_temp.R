@@ -9,32 +9,8 @@ library(gridExtra)
 library(reshape2)
 source("~/Dropbox/SubnationalCRVS/R/Helpers.R")
 
-# national-level stuff
-my_plots_dir <- "Plots/"
-head(ecuador_five_year_ages)
-tail(ecuador_five_year_ages)
-a <- ecuador_five_year_ages %>% group_by(sex, age) %>%
-                                summarize("pop1"=sum(pop1),
-                                          "pop2"=sum(pop2),
-                                          "deaths"=sum(deaths),
-                                          "province_name"="National",
-                                          "province_name_short"="Nat",
-                                          "date1"="2001-11-25",
-                                          "date2"="2010-11-28") %>%
-                                select(province_name,
-                                       province_name_short,
-                                       sex,
-                                       age,
-                                       pop1,
-                                       pop2,
-                                       deaths,
-                                       date1,
-                                       date2) %>%
-                                as.data.frame()
-ecuador_five_year_ages_with_national <- rbind(a,
-                                              ecuador_five_year_ages)
-
 # debugging
+my_plots_dir <- "Plots/"
 data <- ecuador_single_year_ages_combined
 name.disaggregations <- "province_name"
 name.males <- "m"
@@ -81,7 +57,14 @@ Whipple.age.max=NULL
 Whipple.digit=NULL
 Myers.age.min=NULL
 Myers.age.max=NULL
+Noumbissi.age.min=NULL
+Noumbissi.age.max=NULL
 base.size=12
+fig.nrow.Noumbissi=2
+fig.ncol.Noumbissi=1
+show.thresholds.Noumbissi=TRUE
+save.name.plots=NULL
+show.population.counts=TRUE
 
 
 label.completeness = "Completeness"
