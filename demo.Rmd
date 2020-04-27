@@ -219,7 +219,7 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 As a more concise summary of potential age-heaping suggested by the visualizations from `PlotPotentialAgeHeaping`, we now use the `PlotAgeHeapingScores` function with the same arguments we provided to the `PlotAgeRatios` function.
 
 ```{r "age_heaping_scores", message=FALSE, warning=FALSE, eval=TRUE}
-ageheaping <- PlotAgeHeapingScores(data=ecuador_single_year_ages,
+ageheaping <- PlotAgeHeapingScores(data=ecuador_single_year_ages_combined,
                                       name.disaggregations="province_name",
                                       name.males="m",
                                       name.females="f",
@@ -264,8 +264,7 @@ ageheaping_with_Noumbissi <- ComputeAgeHeapingScores(data=ecuador_single_year_ag
                                       name.date1="date1",
                                       name.date2="date2",
                                       name.population.year1="pop1",
-                                      name.population.year2="pop2",
-                                      Noumbissi.display=TRUE)
+                                      name.population.year2="pop2")
 head(ageheaping_with_Noumbissi)
 ```
 
