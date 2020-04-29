@@ -27,7 +27,6 @@ ecuador_five_year_ages <- example_data_ecuador %>%
                                date1,
                                date2)
 rm(example_data_ecuador)
-save(ecuador_five_year_ages, file="../SubnationalCRVS/data/ecuador_five_year_ages.rda")
 
 ## also save national-level datasets (both appended to the subnational dataset and separately)
 ### separate
@@ -47,11 +46,20 @@ ecuador_five_year_ages_national <- ecuador_five_year_ages_national %>%
                                           deaths,
                                           date1,
                                           date2)
-save(ecuador_five_year_ages_national, 
-    file="../SubnationalCRVS/data/ecuador_five_year_ages_national.rda")
 ### combined with subnational results
 ecuador_five_year_ages_combined <- rbind(ecuador_five_year_ages,
                                          ecuador_five_year_ages_national)
+
+### save everything
+## 27/04/2020 - Decided to remove `province_name_short` column
+ecuador_five_year_ages$province_name_short <- NULL
+ecuador_five_year_ages_national$province_name_short <- NULL
+ecuador_five_year_ages_combined$province_name_short <- NULL
+
+save(ecuador_five_year_ages, 
+     file="../SubnationalCRVS/data/ecuador_five_year_ages.rda")
+save(ecuador_five_year_ages_national, 
+     file="../SubnationalCRVS/data/ecuador_five_year_ages_national.rda")
 save(ecuador_five_year_ages_combined, 
      file="../SubnationalCRVS/data/ecuador_five_year_ages_combined.rda")
 
@@ -1529,6 +1537,11 @@ ecuador_single_year_ages_national$province_name_short <- "Nat"
 
 ecuador_single_year_ages_combined <- rbind(ecuador_single_year_ages, 
                                            ecuador_single_year_ages_national)
+
+## 27/04/2020 - Decided to remove `province_name_short` column
+ecuador_single_year_ages$province_name_short <- NULL
+ecuador_single_year_ages_national$province_name_short <- NULL
+ecuador_single_year_ages_combined$province_name_short <- NULL
 
 save(ecuador_single_year_ages, 
      file="../SubnationalCRVS/data/ecuador_single_year_ages.rda")
