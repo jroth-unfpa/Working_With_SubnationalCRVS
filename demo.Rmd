@@ -306,8 +306,7 @@ We note `EstimateDDM()` uses exactly the same arguments as `PlotAgeRatios()`, fo
 We can plot the estimated adult death registration completeness (using the "hybrid" GGB-SEG method) with the `PlotDDM` function:
 ```{r "plot_DDM", message=FALSE, warning=FALSE, eval=TRUE}
 PlotDDM(ddm_results=ddm_results,
-        label.completeness="Estimated Adult Death Registration Completeness (%)",
-        label.subnational.levels="Province",
+        label.subnational.level="Province",
         plots.dir=my_plots_dir)
 ```
 
@@ -323,11 +322,20 @@ The `EstimateDDM` function also returns a list, in which the `ddm_estimates` obj
 head(ddm_results$ggbseg_estimates)
 ```
 
-Additionally, `PlotDDM` presents a visualization of the GGB-SEG estimates of adult death-registration completeness to the all permitted values of the age range (i.e. sensitivity) that is selected `DDM::ddm()` as part of the fitting procedure underlying its estimation.
+Additionally, `PlotDDM` presents a visualization
+
+of the point estimates of completeness and the corresponding root mean squared errors (RMSEs) for each of the permitted values of the age range that is selected `DDM::ddm()` as part of its fitting procedure.
 
 ```{r "DDM_sensitivity_estimates_in_plot", echo=TRUE, fig.cap="Sensitivity of point estimates of death registration completeness in Ecuador from 2001-2010 to choice of age-range parameter in the GGB-SEG method", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
                                    "ggbseg_sensitivity_province_name_",
+                                   Sys.Date(),
+                                   ".pdf"))
+```
+
+```{r "DDM_RMSE_estimates_in_plot", echo=TRUE, fig.cap="Sensitivity of point estimates of death registration completeness in Ecuador from 2001-2010 to choice of age-range parameter in the GGB-SEG method", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
+knitr::include_graphics(path=paste0(my_plots_dir,
+                                   "ggbseg_RMSE_province_name_",
                                    Sys.Date(),
                                    ".pdf"))
 ```
@@ -391,6 +399,12 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 ```{r "DDM_sensitivity_estimates_in_plot_national", echo=TRUE, fig.cap="Sensitivity of point estimates of death registration completeness in Ecuador from 2001-2010 to choice of age-range parameter in the GGB-SEG method", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
                                    "ggbseg_sensitivity_National_",
+                                   Sys.Date(),
+                                   ".pdf"))
+```
+```{r "DDM_RMSE_estimates_in_plot_national", echo=TRUE, fig.cap="Sensitivity of point estimates of death registration completeness in Ecuador from 2001-2010 to choice of age-range parameter in the GGB-SEG method", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
+knitr::include_graphics(path=paste0(my_plots_dir,
+                                   "ggbseg_RMSE_National_",
                                    Sys.Date(),
                                    ".pdf"))
 ```

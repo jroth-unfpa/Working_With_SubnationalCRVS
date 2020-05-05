@@ -9,9 +9,10 @@ library(gridExtra)
 library(reshape2)
 source("~/Dropbox/SubnationalCRVS/R/Helpers.R")
 
+
 # debugging
 my_plots_dir <- "Plots/"
-data <- ecuador_single_year_ages_combined
+data <- ecuador_five_year_ages
 name.disaggregations <- "province_name"
 name.males <- "m"
 name.females <- "f"
@@ -68,6 +69,7 @@ show.population.counts=TRUE
 
 
 label.completeness = "Completeness"
+label.RMSE = "RMSE"
 base.size.point.estimates = 12
 base.size.sensitivity = 9
 
@@ -79,6 +81,11 @@ exact.ages.to.use=NULL
 largest.lower.limit.sensitivity=45
 smallest.upper.limit.sensitivity=50
 life.expectancy.in.open.group=NULL
+minA=15
+maxA=75
+minAges=8
+exact.ages=NULL
+
 
 
 
@@ -90,9 +97,11 @@ fig.ncol=1
 show.lines.sex.differential=TRUE
 show.size.population=TRUE
 label.completeness="Estimated death registration completeness (GGB-SEG)"
+label.RMSE="RMSE"
 label.subnational.levels=ddm_results$name_disaggregations
 save.name.plot.point.estimates=NULL
 save.name.plots.sensitivity=NULL
+save.name.plots.RMSE=NULL
 plots.dir=my_plots_dir
 
 
