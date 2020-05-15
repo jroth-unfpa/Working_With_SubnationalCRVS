@@ -79,9 +79,17 @@ To use `PlotSexRatios()`, we are required to provide our tabulated data frame in
 
 - `name.age` is the name of variable representing age. Here we specify `name.age="age"`
 
-- `name.date1` is the name of variable that provides the date of the earlier of the two time periods represented in `data. Here we specify `name.date1="date1"` (the value of this variable, `"2001-11-15"` is the date of Ecuador's 2001 Census)
+- `name.year1` is the name of variable that provides the year of the earlier of the two time periods represented in `data`. Here we specify `name.year1="year1"` (the value of this variable, `"2001"` was the year of Ecuador's 2001 Census)
 
-- `name.date2` is the name of variable that provides the date of the earlier of the two time periods represented in `data`. Here we specify `name.date2="date2"` (the value of this variable, `"2010-11-28"` is the date of Ecuador's 2010 Census)
+- `name.month1` is the name of variable that provides the month of the earlier of the two time periods represented in `data`. Here we specify `name.month1="month1"` (the value of this variable, `"11"` was the numerical month, November, of Ecuador's 2001 Census)
+
+- `name.day1` is the name of variable that provides the day of the earlier of the two time periods represented in `data`. Here we specify `name.day1="day1"` (the value of this variable, `"25"` was the day of Ecuador's 2001 Census)
+
+- `name.year2` is the name of variable that provides the year of the later of the two time periods represented in `data`. Here we specify `name.year2="year2"` (the value of this variable, `"2010"` was the year of Ecuador's 2010 Census)
+
+- `name.month2` is the name of variable that provides the month of the laterof the two time periods represented in `data`. Here we specify `name.month2="month2"` (the value of this variable, `"11"` was the numerical month, November, of Ecuador's 2010 Census)
+
+- `name.day2` is the name of variable that provides the day of the later of the two time periods represented in `data`. Here we specify `name.day2="day2"` (the value of this variable, `"28"` was the day of Ecuador's 2010 Census)
 
 - `name.population.year1` is the name of variable representing the population in the earlier of the two time periods represented in the dataset. Here we specify `name.population.year2="pop1"`
 
@@ -100,10 +108,14 @@ c_s <- ComputeSexRatios(data=ecuador_single_year_ages_combined,
                    name.females="f",
                    name.age="age",
                    name.sex="sex",
-                   name.date1="date1",
-                   name.date2="date2",
                    name.population.year1="pop1",
-                   name.population.year2="pop2")
+                   name.population.year2="pop2",
+                   name.year1="year1",
+                   name.month1="month1",
+                   name.day1="day1",
+                   name.year2="year2",
+                   name.month2="month2",
+                   name.day2="day2")
 ```
 
 ```{r "plot_sex_ratios", message=FALSE, warning=FALSE}
@@ -113,10 +125,14 @@ s <- PlotSexRatios(data=ecuador_single_year_ages_combined,
                    name.females="f",
                    name.age="age",
                    name.sex="sex",
-                   name.date1="date1",
-                   name.date2="date2",
                    name.population.year1="pop1",
                    name.population.year2="pop2",
+                   name.year1="year1",
+                   name.month1="month1",
+                   name.day1="day1",
+                   name.year2="year2",
+                   name.month2="month2",
+                   name.day2="day2",
                    name.national="National",
                    label.subnational.level="Province",
                    plots.dir=my_plots_dir)
@@ -158,10 +174,14 @@ a <- PlotAgeRatios(data=ecuador_five_year_ages_combined,
               name.females="f",
               name.age="age",
               name.sex="sex",
-              name.date1="date1",
-              name.date2="date2",
               name.population.year1="pop1",
               name.population.year2="pop2",
+              name.year1="year1",
+              name.month1="month1",
+              name.day1="day1",
+              name.year2="year2",
+              name.month2="month2",
+              name.day2="day2",
               label.subnational.level="Province",
               name.national="National",
               plots.dir=my_plots_dir)
@@ -204,10 +224,14 @@ PlotPotentialAgeHeaping(data=ecuador_single_year_ages_combined,
               name.females="f",
               name.age="age",
               name.sex="sex",
-              name.date1="date1",
-              name.date2="date2",
               name.population.year1="pop1",
               name.population.year2="pop2",
+              name.year1="year1",
+              name.month1="month1",
+              name.day1="day1",
+              name.year2="year2",
+              name.month2="month2",
+              name.day2="day2",
               name.national="National",
               label.subnational.level="Province",
               plots.dir=my_plots_dir)
@@ -243,10 +267,14 @@ ageheaping <- PlotAgeHeapingScores(data=ecuador_single_year_ages_combined,
                                       name.females="f",
                                       name.age="age",
                                       name.sex="sex",
-                                      name.date1="date1",
-                                      name.date2="date2",
                                       name.population.year1="pop1",
                                       name.population.year2="pop2",
+                                      name.year1="year1",
+                                      name.month1="month1",
+                                      name.day1="day1",
+                                      name.year2="year2",
+                                      name.month2="month2",
+                                      name.day2="day2",
                                       name.national="National",
                                       label.subnational.level="Province",
                                       plots.dir=my_plots_dir)
@@ -287,8 +315,12 @@ ddm_results <- EstimateDDM(data=ecuador_five_year_ages_combined,
             name.sex="sex",
             name.males="m",
             name.females="f",
-            name.date1="date1",
-            name.date2="date2",
+            name.year1="year1",
+            name.month1="month1",
+            name.day1="day1",
+            name.year2="year2",
+            name.month2="month2",
+            name.day2="day2",
             name.population.year1="pop1",
             name.population.year2="pop2",
             name.national="National",
