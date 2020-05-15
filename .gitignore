@@ -17,11 +17,18 @@ daily_priorities.rtf
 DDM/
 References/
 
+# data for compiling package
+data/
+
+# scripts for debugging/testing
+*debugging*
+
 # output from debugging/testing
-Plots/
+Plots/n
+Data/
 
 # History files
-.Rhistory
+*.Rhistory*
 .Rapp.history
 .DS_Store
 
