@@ -11,15 +11,11 @@ header-includes:
  \usepackage{float}
 ---
 
-```{r "clear", include=FALSE}
-rm(list=ls())
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # Setup
 The `SubnationalCRVS` package, which is still under active development, is hosted on my GitHub page (`www.github.com/jroth-unfpa/SubnationalCRVS`) rather than on CRAN. As a result, `SubnationalCRVS` must be installed with the `install.github()` function from the `devtools` package instead of the usual `install.packages()` function. The required dependency `DemoTools` [@DemoTools] is also hosted on GitHub instead of CRAN and thus must also be installed with `install.github()`.
 
 ```{r "install_package", eval=FALSE}
+install.packages("devtools")
 library(devtools)
 install_github("timriffe/DemoTools") # install the DemoTools dependency 
 install_github("jroth-unfpa/SubnationalCRVS") # install the SubnationalCRVS package
