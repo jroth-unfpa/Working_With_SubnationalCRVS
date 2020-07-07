@@ -12,13 +12,13 @@ header-includes:
 ---
 
 # Setup
-The `SubnationalCRVS` package, which is still under active development, is hosted on my GitHub page (`www.github.com/jroth-unfpa/SubnationalCRVS`) rather than on CRAN. As a result, `SubnationalCRVS` must be installed with the `install.github()` function from the `devtools` package instead of the usual `install.packages()` function. The required dependency `DemoTools` [@DemoTools] is also hosted on GitHub instead of CRAN and thus must also be installed with `install.github()`.
+The `SubnationalCRVS` package, which is still under active development, is hosted on my GitHub page (`www.github.com/ConVERGE-UNFPA/SubnationalCRVS`) rather than on CRAN. As a result, `SubnationalCRVS` must be installed with the `install.github()` function from the `devtools` package instead of the usual `install.packages()` function. The required dependency `DemoTools` [@DemoTools] is also hosted on GitHub instead of CRAN and thus must also be installed with `install.github()`.
 
 ```{r "install_package", eval=FALSE}
 install.packages("devtools")
 library(devtools)
 install_github("timriffe/DemoTools") # install the DemoTools dependency 
-install_github("jroth-unfpa/SubnationalCRVS") # install the SubnationalCRVS package
+install_github("ConVERGE-UNFPA/SubnationalCRVS") # install the SubnationalCRVS package
 ```
 Now we can load `SubnationalCRVS`, specify the name of the local folder in which we will save the plots produced by the package, and create that local folder if it does not already exist.
 ```{r "load_package", message=FALSE, warning=FALSE}
