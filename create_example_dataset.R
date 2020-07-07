@@ -64,18 +64,12 @@ save(ecuador_five_year_ages_combined,
      file="../SubnationalCRVS/data/ecuador_five_year_ages_combined.rda")
 
 
-# ddm-ready dataset with 5-year age groups: Rabat
-example_data_rabat <- read.csv("data/data_for_ddm_rabat.csv", 
-                                 header=TRUE, stringsAsFactors=FALSE)
-example_data_rabat <- example_data_rabat %>%
-                      rename("residence_type"="cod")
-save(example_data_rabat, file="../SubnationalCRVS/src/example_data_rabat.rda")
-
-
 # load raw province-specific Census files from Ecuador that show single-year ages
 # source: https://www.ecuadorencifras.gob.ec/base-de-datos-censo-de-poblacion-y-vivienda-2010/
 # I will just share the tabulations that give me the age counts, though
 create_single_year_ecuador <- FALSE
+dir_ecuador_census_2010 <- "G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/"
+dir_ecuador_census_2001 <- "G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/"
 
 if (create_single_year_ecuador == TRUE) {
 library(haven)
@@ -91,7 +85,7 @@ ecuador_2010_age_tabulation$age <- rep(rep(0:90, times=2),
                                        times=23)
 
 ## Province 1: Azuay
-SPSS_Azuay_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Azuay_Poblacion.sav")
+SPSS_Azuay_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Azuay_Poblacion.sav"))
 census_2010_Azuay <- SPSS_Azuay_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -120,7 +114,7 @@ ecuador_2010_age_tabulation[ecuador_2010_age_tabulation$province == one.province
 rm(census_2010_Azuay)
 
 ## Province 2: Bolivar
-SPSS_Bolivar_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Bolivar_Poblacion.sav")
+SPSS_Bolivar_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Bolivar_Poblacion.sav"))
 census_2010_Bolivar <- SPSS_Bolivar_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -149,7 +143,7 @@ ecuador_2010_age_tabulation[ecuador_2010_age_tabulation$province == one.province
 rm(census_2010_Bolivar)
 
 ## Province 3: Cañar
-SPSS_Canar_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Canar_Poblacion.sav")
+SPSS_Canar_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Canar_Poblacion.sav"))
 census_2010_Canar <- SPSS_Canar_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -178,7 +172,7 @@ ecuador_2010_age_tabulation[ecuador_2010_age_tabulation$province == one.province
 rm(census_2010_Canar)
 
 ## Province 4: Carchi
-SPSS_Carchi_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Carchi_Poblacion.sav")
+SPSS_Carchi_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Carchi_Poblacion.sav"))
 census_2010_Carchi <- SPSS_Carchi_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -207,7 +201,7 @@ ecuador_2010_age_tabulation[ecuador_2010_age_tabulation$province == one.province
 rm(census_2010_Carchi)
 
 ## Province 5: Chimborazo
-SPSS_Chimborazo_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Chimborazo_Poblacion.sav")
+SPSS_Chimborazo_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Chimborazo_Poblacion.sav"))
 census_2010_Chimborazo <- SPSS_Chimborazo_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -237,7 +231,7 @@ rm(census_2010_Chimborazo)
 
 
 ## Province 6: Cotopaxi
-SPSS_Cotopaxi_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Cotopaxi_Poblacion.sav")
+SPSS_Cotopaxi_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Cotopaxi_Poblacion.sav"))
 census_2010_Cotopaxi <- SPSS_Cotopaxi_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -267,7 +261,7 @@ rm(census_2010_Cotopaxi)
 
 
 ## Province 7: El Oro
-SPSS_ElOro_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_ElOro_Poblacion.sav")
+SPSS_ElOro_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_ElOro_Poblacion.sav"))
 census_2010_ElOro <- SPSS_ElOro_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -297,7 +291,7 @@ rm(census_2010_ElOro)
 
 
 ## Province 8: Esmeraldas
-SPSS_Esmeraldas_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Esmeraldas_Poblacion.sav")
+SPSS_Esmeraldas_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Esmeraldas_Poblacion.sav"))
 census_2010_Esmeraldas <- SPSS_Esmeraldas_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -326,7 +320,7 @@ ecuador_2010_age_tabulation[ecuador_2010_age_tabulation$province == one.province
 rm(census_2010_Esmeraldas)
 
 ## Province 9: Guayas
-SPSS_Guayas_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Guayas_Poblacion.sav")
+SPSS_Guayas_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Guayas_Poblacion.sav"))
 census_2010_Guayas <- SPSS_Guayas_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -356,7 +350,7 @@ rm(census_2010_Guayas)
 
 
 ## Province 10: Imbabura
-SPSS_Imbabura_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Imbabura_Poblacion.sav")
+SPSS_Imbabura_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Imbabura_Poblacion.sav"))
 census_2010_Imbabura <- SPSS_Imbabura_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -386,7 +380,7 @@ rm(census_2010_Imbabura)
 
 
 ## Province 11: Loja
-SPSS_Loja_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Loja_Poblacion.sav")
+SPSS_Loja_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Loja_Poblacion.sav"))
 census_2010_Loja <- SPSS_Loja_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -415,7 +409,7 @@ ecuador_2010_age_tabulation[ecuador_2010_age_tabulation$province == one.province
 rm(census_2010_Loja)
 
 ## Province 12: Los Rios
-SPSS_LosRios_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_LosRios_Poblacion.sav")
+SPSS_LosRios_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_LosRios_Poblacion.sav"))
 census_2010_LosRios <- SPSS_LosRios_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -445,7 +439,7 @@ rm(census_2010_LosRios)
 
 
 ## Province 13: Manabi
-SPSS_Manabi_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Manabi_Poblacion.sav")
+SPSS_Manabi_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Manabi_Poblacion.sav"))
 census_2010_Manabi <- SPSS_Manabi_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -474,7 +468,7 @@ ecuador_2010_age_tabulation[ecuador_2010_age_tabulation$province == one.province
 rm(census_2010_Manabi)
 
 ## Province 14: Morona Santiago
-SPSS_Morona_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Morona_Poblacion.sav")
+SPSS_Morona_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Morona_Poblacion.sav"))
 census_2010_Morona <- SPSS_Morona_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -504,7 +498,7 @@ rm(census_2010_Morona)
 
 
 ## Province 15: Napo
-SPSS_Napo_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Napo_Poblacion.sav")
+SPSS_Napo_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Napo_Poblacion.sav"))
 census_2010_Napo <- SPSS_Napo_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -535,7 +529,7 @@ rm(census_2010_Napo)
 
 
 ## Province 16: Pastaza
-SPSS_Pastaza_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Pastaza_Poblacion.sav")
+SPSS_Pastaza_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Pastaza_Poblacion.sav"))
 census_2010_Pastaza <- SPSS_Pastaza_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -565,7 +559,7 @@ rm(census_2010_Pastaza)
 
 
 ## Province 17: Pichincha
-SPSS_Pichincha_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Pichincha_Poblacion.sav")
+SPSS_Pichincha_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Pichincha_Poblacion.sav"))
 census_2010_Pichincha <- SPSS_Pichincha_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -595,7 +589,7 @@ rm(census_2010_Pichincha)
 
 
 ## Province 24: SantaElena
-SPSS_SantaElena_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_SantaElena_Poblacion.sav")
+SPSS_SantaElena_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_SantaElena_Poblacion.sav"))
 census_2010_SantaElena <- SPSS_SantaElena_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -625,7 +619,7 @@ rm(census_2010_SantaElena)
 
 
 ## Province 19: Zamora
-SPSS_Zamora_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Zamora_Poblacion.sav")
+SPSS_Zamora_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Zamora_Poblacion.sav"))
 census_2010_Zamora <- SPSS_Zamora_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -654,7 +648,7 @@ ecuador_2010_age_tabulation[ecuador_2010_age_tabulation$province == one.province
 rm(census_2010_Zamora)
 
 ## Province 20: Galapagos
-SPSS_Galapagos_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Galapagos_Poblacion.sav")
+SPSS_Galapagos_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Galapagos_Poblacion.sav"))
 census_2010_Galapagos <- SPSS_Galapagos_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -684,7 +678,7 @@ rm(census_2010_Galapagos)
 
 
 ## Province 21: Sucumbios
-SPSS_Sucumbios_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Sucumbios_Poblacion.sav")
+SPSS_Sucumbios_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Sucumbios_Poblacion.sav"))
 census_2010_Sucumbios <- SPSS_Sucumbios_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -713,7 +707,7 @@ ecuador_2010_age_tabulation[ecuador_2010_age_tabulation$province == one.province
 rm(census_2010_Sucumbios)
 
 ## Province 18: Tungurahua
-SPSS_Tungurahua_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_Tungurahua_Poblacion.sav")
+SPSS_Tungurahua_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_Tungurahua_Poblacion.sav"))
 census_2010_Tungurahua <- SPSS_Tungurahua_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -743,7 +737,7 @@ rm(census_2010_Tungurahua)
 
 
 ## Province 23: SantoDomingo
-SPSS_SantoDomingo_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2010/SPSS_SantoDomingo_Poblacion.sav")
+SPSS_SantoDomingo_Poblacion <- read_sav(paste0(dir_ecuador_census_2010, "SPSS_SantoDomingo_Poblacion.sav"))
 census_2010_SantoDomingo <- SPSS_SantoDomingo_Poblacion %>%
   select(I01, URP, P01, P03) %>%
   rename(province=I01, Rural=URP, sex=P01, age=P03)
@@ -792,7 +786,7 @@ ecuador_2001_age_tabulation$age <- rep(rep(0:90, times=2),
                                        times=22)
 
 ## Province 1: Azuay
-SPSS_Azuay_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_azuay.sav")
+SPSS_Azuay_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_azuay.sav"))
 census_2001_Azuay <- SPSS_Azuay_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -820,7 +814,7 @@ ecuador_2001_age_tabulation[ecuador_2001_age_tabulation$province == one.province
 rm(census_2001_Azuay)
 
 ## Province 2: Bolivar
-SPSS_Bolivar_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Bolivar.sav")
+SPSS_Bolivar_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Bolivar.sav"))
 census_2001_Bolivar <- SPSS_Bolivar_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -849,7 +843,7 @@ rm(census_2001_Bolivar)
 
 
 ## Province 3: Cañar
-SPSS_Canar_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Canar.sav")
+SPSS_Canar_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Canar.sav"))
 census_2001_Canar <- SPSS_Canar_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -877,7 +871,7 @@ ecuador_2001_age_tabulation[ecuador_2001_age_tabulation$province == one.province
 rm(census_2001_Canar)
 
 ## Province 4: Carchi
-SPSS_Carchi_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Carchi.sav")
+SPSS_Carchi_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Carchi.sav"))
 census_2001_Carchi <- SPSS_Carchi_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -906,7 +900,7 @@ rm(census_2001_Carchi)
 
 
 ## Province 6: Chimborazo
-SPSS_Chimborazo_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Chimborazo.sav")
+SPSS_Chimborazo_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Chimborazo.sav"))
 census_2001_Chimborazo <- SPSS_Chimborazo_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -935,7 +929,7 @@ rm(census_2001_Chimborazo)
 
 
 ## Province 5: Cotopaxi
-SPSS_Cotopaxi_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Cotopaxi.sav")
+SPSS_Cotopaxi_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Cotopaxi.sav"))
 census_2001_Cotopaxi <- SPSS_Cotopaxi_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -964,7 +958,7 @@ rm(census_2001_Cotopaxi)
 
 
 ## Province 7: El Oro
-SPSS_ElOro_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_ElOro.sav")
+SPSS_ElOro_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_ElOro.sav"))
 census_2001_ElOro <- SPSS_ElOro_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -993,7 +987,7 @@ rm(census_2001_ElOro)
 
 
 ## Province 8: Esmeraldas
-SPSS_Esmeraldas_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Esmeraldas.sav")
+SPSS_Esmeraldas_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Esmeraldas.sav"))
 census_2001_Esmeraldas <- SPSS_Esmeraldas_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1023,7 +1017,7 @@ rm(census_2001_Esmeraldas)
 
 
 ## Province 9: Guayas
-SPSS_Guayas_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Guayas.sav")
+SPSS_Guayas_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Guayas.sav"))
 census_2001_Guayas <- SPSS_Guayas_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1052,7 +1046,7 @@ rm(census_2001_Guayas)
 
 
 ## Province 10: Imbabura
-SPSS_Imbabura_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Imbabura.sav")
+SPSS_Imbabura_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Imbabura.sav"))
 census_2001_Imbabura <- SPSS_Imbabura_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1081,7 +1075,7 @@ rm(census_2001_Imbabura)
 
 
 ## Province 11: Loja
-SPSS_Loja_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Loja.sav")
+SPSS_Loja_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Loja.sav"))
 census_2001_Loja <- SPSS_Loja_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1110,7 +1104,7 @@ rm(census_2001_Loja)
 
 
 ## Province 12: Los Rios
-SPSS_LosRios_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_LosRios.sav")
+SPSS_LosRios_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_LosRios.sav"))
 census_2001_LosRios <- SPSS_LosRios_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1139,7 +1133,7 @@ rm(census_2001_LosRios)
 
 
 ## Province 13: Manabi
-SPSS_Manabi_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Manabi.sav")
+SPSS_Manabi_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Manabi.sav"))
 census_2001_Manabi <- SPSS_Manabi_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1167,7 +1161,7 @@ ecuador_2001_age_tabulation[ecuador_2001_age_tabulation$province == one.province
 rm(census_2001_Manabi)
 
 ## Province 14: Morona Santiago
-SPSS_MoronaSantiago_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_MoronaSantiago.sav")
+SPSS_MoronaSantiago_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_MoronaSantiago.sav"))
 census_2001_MoronaSantiago <- SPSS_MoronaSantiago_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1196,7 +1190,7 @@ rm(census_2001_MoronaSantiago)
 
 
 ## Province 15: Napo
-SPSS_Napo_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Napo.sav")
+SPSS_Napo_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Napo.sav"))
 census_2001_Napo <- SPSS_Napo_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1225,7 +1219,7 @@ rm(census_2001_Napo)
 
 
 ## Province 22: Orellana
-SPSS_Orellana_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Orellana.sav")
+SPSS_Orellana_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Orellana.sav"))
 census_2001_Orellana <- SPSS_Orellana_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1254,7 +1248,7 @@ rm(census_2001_Orellana)
 
 
 ## Province 16: Pastaza
-SPSS_Pastaza_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Pastaza.sav")
+SPSS_Pastaza_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Pastaza.sav"))
 census_2001_Pastaza <- SPSS_Pastaza_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1283,7 +1277,7 @@ rm(census_2001_Pastaza)
 
 
 ## Province 22: Orellana
-SPSS_Orellana_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Orellana.sav")
+SPSS_Orellana_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Orellana.sav"))
 census_2001_Orellana <- SPSS_Orellana_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1312,7 +1306,7 @@ rm(census_2001_Orellana)
 
 
 ## Province 16: Pastaza
-SPSS_Pastaza_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Pastaza.sav")
+SPSS_Pastaza_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Pastaza.sav"))
 census_2001_Pastaza <- SPSS_Pastaza_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1341,7 +1335,7 @@ rm(census_2001_Pastaza)
 
 
 ## Province 17: Pichincha
-SPSS_Pichincha_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Pichincha.sav")
+SPSS_Pichincha_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Pichincha.sav"))
 census_2001_Pichincha <- SPSS_Pichincha_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1370,7 +1364,7 @@ rm(census_2001_Pichincha)
 
 
 ## Province 21: Sucumbios
-SPSS_Sucumbios_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Sucumbios.sav")
+SPSS_Sucumbios_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Sucumbios.sav"))
 census_2001_Sucumbios <- SPSS_Sucumbios_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1399,7 +1393,7 @@ rm(census_2001_Sucumbios)
 
 
 ## Province 18: Tungurahua
-SPSS_Tungurahua_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Tungurahua.sav")
+SPSS_Tungurahua_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Tungurahua.sav"))
 census_2001_Tungurahua <- SPSS_Tungurahua_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1428,7 +1422,7 @@ rm(census_2001_Tungurahua)
 
 
 ## Province 19: Zamora
-SPSS_Zamora_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Zamora.sav")
+SPSS_Zamora_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Zamora.sav"))
 census_2001_Zamora <- SPSS_Zamora_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
@@ -1457,7 +1451,7 @@ rm(census_2001_Zamora)
 
 
 ## Province 20: Galápagos
-SPSS_Galapagos_Poblacion <- read_sav("G:/My Drive/UNFPA/DDM_and_DemoTools_Ecuador/Data/census_2001/poblac_Galapagos.sav")
+SPSS_Galapagos_Poblacion <- read_sav(paste0(dir_ecuador_census_2001, "poblac_Galapagos.sav"))
 census_2001_Galapagos <- SPSS_Galapagos_Poblacion %>%
   select(PROVIN, SEXO, EDAD) %>%
   rename(province=PROVIN, sex=SEXO, age=EDAD)
