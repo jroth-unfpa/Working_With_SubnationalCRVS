@@ -12,7 +12,7 @@ header-includes:
 ---
 
 # Setup
-The `SubnationalCRVS` package, which is still under active development, is hosted on the GitHub page `www.github.com/ConVERGE-UNFPA/SubnationalCRVS` rather than on CRAN. As a result, `SubnationalCRVS` must be installed with the `install.github()` function from the `devtools` package instead of the usual `install.packages()` function. The key dependency `DemoTools` [@DemoTools] is also hosted on GitHub instead of CRAN and thus must also be installed with `install.github()`.
+The `SubnationalCRVS` package, which is still under active development, is hosted on the GitHub page `www.github.com/ConVERGE-UNFPA/SubnationalCRVS` rather than on CRAN. As a result, `SubnationalCRVS` cannot be installed with the usual `install.packages()` function. Instead, `SubnationalCRVS` can be installed with the `install_github()` function from the `devtools` package. The key dependency `DemoTools` [@DemoTools] is also hosted on GitHub instead of CRAN and can also be installed with `install_github()`.
 
 ```{r "install_package", eval=FALSE}
 install.packages("devtools")
