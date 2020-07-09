@@ -1,7 +1,7 @@
 ---
-title: "Woking with the `SubnationalCRVS` R Package"
+title: "Working with the `SubnationalCRVS` R Package"
 author: "Created by: Jeremy Roth"
-date: 'Last Updated: 7 July 2020'
+date: 'Last Updated: 9 July 2020'
 output:
   pdf_document:
     number_sections: yes
@@ -83,7 +83,7 @@ To use `PlotSexRatios()`, we are required to provide our tabulated data frame in
 
 - `name.year2` is the name of variable that provides the year of the later of the two time periods represented in `data`. Here we specify `name.year2="year2"` (the value of this variable, `"2010"` was the year of Ecuador's 2010 Census)
 
-- `name.month2` is the name of variable that provides the month of the laterof the two time periods represented in `data`. Here we specify `name.month2="month2"` (the value of this variable, `"11"` was the numerical month, November, of Ecuador's 2010 Census)
+- `name.month2` is the name of variable that provides the month of the later of the two time periods represented in `data`. Here we specify `name.month2="month2"` (the value of this variable, `"11"` was the numerical month, November, of Ecuador's 2010 Census)
 
 - `name.day2` is the name of variable that provides the day of the later of the two time periods represented in `data`. Here we specify `name.day2="day2"` (the value of this variable, `"28"` was the day of Ecuador's 2010 Census)
 
