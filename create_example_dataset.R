@@ -1,68 +1,6 @@
 # Jeremy Roth
 rm(list=ls())
 library(dplyr)
-memory.limit(size=56000) 
-
-# ddm-ready dataset with 5-year age groups: Ecuador (shared by Andres Peralta and created by publicly available data)
-example_data_ecuador_initial <- read.csv("data/data_for_ddm_ecuador.csv", 
-                         header=TRUE, stringsAsFactors=FALSE)
-cod_names <- read.csv("data/cod_to_names.csv",
-                      header=TRUE, stringsAsFactors=FALSE)
-example_data_ecuador <- left_join(example_data_ecuador_initial,
-                                  cod_names,
-                                  by="cod")
-rm(example_data_ecuador_initial)
-ecuador_five_year_ages <- example_data_ecuador %>% 
-                        filter(cod != 90) %>% 
-                        rename("province"="cod",
-                                "province_name"="cod_name",
-                                "province_name_short"="cod_name_short") %>%
-                        select(province_name,
-                               province_name_short,
-                               sex,
-                               age,
-                               pop1,
-                               pop2,
-                               deaths,
-                               date1,
-                               date2)
-rm(example_data_ecuador)
-
-## also save national-level datasets (both appended to the subnational dataset and separately)
-### separate
-load("data/SRECUADORNAC.Rda")
-ecuador_five_year_ages_national <- SRECUADORNAC
-ecuador_five_year_ages_national$province_name <- "National"
-ecuador_five_year_ages_national$province_name_short <- "Nat"
-ecuador_five_year_ages_national$date1 <- as.character(ecuador_five_year_ages_national$date1)
-ecuador_five_year_ages_national$date2 <- as.character(ecuador_five_year_ages_national$date2)
-ecuador_five_year_ages_national <- ecuador_five_year_ages_national %>%
-                                   select(province_name,
-                                          province_name_short,
-                                          sex,
-                                          age,
-                                          pop1,
-                                          pop2,
-                                          deaths,
-                                          date1,
-                                          date2)
-### combined with subnational results
-ecuador_five_year_ages_combined <- rbind(ecuador_five_year_ages,
-                                         ecuador_five_year_ages_national)
-
-### save everything
-## 27/04/2020 - Decided to remove `province_name_short` column
-ecuador_five_year_ages$province_name_short <- NULL
-ecuador_five_year_ages_national$province_name_short <- NULL
-ecuador_five_year_ages_combined$province_name_short <- NULL
-
-save(ecuador_five_year_ages, 
-     file="../SubnationalCRVS/data/ecuador_five_year_ages.rda")
-save(ecuador_five_year_ages_national, 
-     file="../SubnationalCRVS/data/ecuador_five_year_ages_national.rda")
-save(ecuador_five_year_ages_combined, 
-     file="../SubnationalCRVS/data/ecuador_five_year_ages_combined.rda")
-
 
 # load raw province-specific Census files from Ecuador that show single-year ages
 # source: https://www.ecuadorencifras.gob.ec/base-de-datos-censo-de-poblacion-y-vivienda-2010/
@@ -1549,4 +1487,68 @@ save(ecuador_single_year_ages_combined,
   load("../SubnationalCRVS/data/ecuador_single_year_ages_national.rda")
   load("../SubnationalCRVS/data/ecuador_single_year_ages_combined.rda")
 }
+
+
+
+# ddm-ready dataset with 5-year age groups: Ecuador (shared by Andres Peralta and created by publicly available data)
+example_data_ecuador_initial <- read.csv("data/data_for_ddm_ecuador.csv", 
+                                         header=TRUE, stringsAsFactors=FALSE)
+cod_names <- read.csv("data/cod_to_names.csv",
+                      header=TRUE, stringsAsFactors=FALSE)
+example_data_ecuador <- left_join(example_data_ecuador_initial,
+                                  cod_names,
+                                  by="cod")
+rm(example_data_ecuador_initial)
+ecuador_five_year_ages <- example_data_ecuador %>% 
+  filter(cod != 90) %>% 
+  rename("province"="cod",
+         "province_name"="cod_name",
+         "province_name_short"="cod_name_short") %>%
+  select(province_name,
+         province_name_short,
+         sex,
+         age,
+         pop1,
+         pop2,
+         deaths,
+         date1,
+         date2)
+rm(example_data_ecuador)
+
+## also save national-level datasets (both appended to the subnational dataset and separately)
+### separate
+load("data/SRECUADORNAC.Rda")
+ecuador_five_year_ages_national <- SRECUADORNAC
+ecuador_five_year_ages_national$province_name <- "National"
+ecuador_five_year_ages_national$province_name_short <- "Nat"
+ecuador_five_year_ages_national$date1 <- as.character(ecuador_five_year_ages_national$date1)
+ecuador_five_year_ages_national$date2 <- as.character(ecuador_five_year_ages_national$date2)
+ecuador_five_year_ages_national <- ecuador_five_year_ages_national %>%
+  select(province_name,
+         province_name_short,
+         sex,
+         age,
+         pop1,
+         pop2,
+         deaths,
+         date1,
+         date2)
+### combined with subnational results
+ecuador_five_year_ages_combined <- rbind(ecuador_five_year_ages,
+                                         ecuador_five_year_ages_national)
+
+### save everything
+## 27/04/2020 - Decided to remove `province_name_short` column
+ecuador_five_year_ages$province_name_short <- NULL
+ecuador_five_year_ages_national$province_name_short <- NULL
+ecuador_five_year_ages_combined$province_name_short <- NULL
+
+save(ecuador_five_year_ages, 
+     file="../SubnationalCRVS/data/ecuador_five_year_ages.rda")
+save(ecuador_five_year_ages_national, 
+     file="../SubnationalCRVS/data/ecuador_five_year_ages_national.rda")
+save(ecuador_five_year_ages_combined, 
+     file="../SubnationalCRVS/data/ecuador_five_year_ages_combined.rda")
+
+
 
