@@ -11,6 +11,7 @@ header-includes:
  \usepackage{float}
 ---
 ```{r wrap-hook, echo=FALSE, include=FALSE}
+## (Solution taken from: https://stackoverflow.com/questions/23114654/knitr-output-hook-with-an-output-lines-option-that-works-like-echo-26)
 library(knitr)
 hook_output = knit_hooks$get('output')
 knit_hooks$set(output = function(x, options) {
