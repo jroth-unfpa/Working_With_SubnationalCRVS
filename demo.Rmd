@@ -10,6 +10,20 @@ bibliography: bibliography.bib
 header-includes:
  \usepackage{float}
 ---
+```{r wrap-hook, echo=FALSE, include=FALSE}
+library(knitr)
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+  # this hook is used only when the linewidth option is not NULL
+  if (!is.null(n <- options$linewidth)) {
+    x = knitr:::split_lines(x)
+    # any lines wider than n should be wrapped
+    if (any(nchar(x) > n)) x = strwrap(x, width = n)
+    x = paste(x, collapse = '\n')
+  }
+  hook_output(x, options)
+})
+```
 
 # Setup
 The `SubnationalCRVS` package, which is still under active development, is hosted on the GitHub page `www.github.com/ConVERGE-UNFPA/SubnationalCRVS` rather than on CRAN. As a result, `SubnationalCRVS` cannot be installed with the usual `install.packages()` function. Instead, `SubnationalCRVS` can be installed with the `install_github()` function from the `devtools` package. The key dependency `DemoTools` [@DemoTools] is also hosted on GitHub instead of CRAN and can also be installed with `install_github()`.
@@ -304,7 +318,7 @@ head(ageheaping)
 The structure of the `ecuador_five_year_ages` dataset is inspired by the requirements for the `ddm()` function from the `DDM` package [@DDM], which uses established Death Distribution Methods (DDM) to estimate death registration completeness for adults (aged 15+) between two consecutive Censuses [@Moultrie:2013]. Essentially, the `SubnationalCRVS` package offers its `EstimateDDM()` function only as a convenient wrapper to `DDM::ddm()` to perform DDM estimation of death registration completeness using the same pipeline used to perform the DDQA.
 
 ### Compute DDM estimates: EstimateDDM()
-```{r "estimate_DDM", message=TRUE, warning=FALSE, eval=TRUE}
+```{r "estimate_DDM", message=TRUE, warning=FALSE, eval=TRUE, linewidth=80}
 ddm_results <- EstimateDDM(data=ecuador_five_year_ages_combined, 
             name.disaggregations="province_name",
             name.age="age",
