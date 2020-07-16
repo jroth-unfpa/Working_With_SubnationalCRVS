@@ -1,7 +1,7 @@
 ---
 title: "Working with the `SubnationalCRVS` R Package"
 author: "Created by: Jeremy Roth"
-date: 'Last Updated: 9 July 2020'
+date: 'Last Updated: 16 July 2020'
 output:
   pdf_document:
     number_sections: yes
@@ -301,7 +301,7 @@ head(ageheaping)
 ```
 
 ## DDM Estimation of Death Registration Completeness
-The structure of the `ecuador_five_year_ages` dataset is inspired by the requirements for the `ddm()` function from the `DDM` package [@DDM], which uses established Death Distribution Methods (DDM) to estimate death registration completeness for adults (aged 15+) between two consecutive Censuses. Essentially, the `SubnationalCRVS` package offers its `EstimateDDM()` function only as a convenient wrapper to `DDM::ddm()` to perform DDM estimation of death registration completeness using the same pipeline used to perform the DDQA.
+The structure of the `ecuador_five_year_ages` dataset is inspired by the requirements for the `ddm()` function from the `DDM` package [@DDM], which uses established Death Distribution Methods (DDM) to estimate death registration completeness for adults (aged 15+) between two consecutive Censuses [@Moultrie:2013]. Essentially, the `SubnationalCRVS` package offers its `EstimateDDM()` function only as a convenient wrapper to `DDM::ddm()` to perform DDM estimation of death registration completeness using the same pipeline used to perform the DDQA.
 
 ### Compute DDM estimates: EstimateDDM()
 ```{r "estimate_DDM", message=TRUE, warning=FALSE, eval=TRUE}
@@ -345,14 +345,12 @@ knitr::include_graphics(path=paste0(my_plots_dir,
                                    ".pdf"))
 ```
 
-The `EstimateDDM` function also returns a list, in which the `ddm_estimates` object contains the estimated death registration completeness with the GGB-SEG approach 
+The `EstimateDDM` function also returns a list, in which the `ddm_estimates` object contains the estimated death registration completeness with the GGB, SEG, and GGB-SEG methods [@Moultrie:2013].
 ```{r "DDM_point_estimates_table", message=TRUE, warning=FALSE, eval=TRUE}
-head(ddm_results$ggbseg_estimates)
+head(ddm_results$ddm_estimates)
 ```
 
-Additionally, `PlotDDM` presents a visualization
-
-of the point estimates of completeness and the corresponding root mean squared errors (RMSEs) for each of the permitted values of the age range that is selected `DDM::ddm()` as part of its fitting procedure.
+Additionally, `PlotDDM` presents a visualization of the point estimates of completeness and the corresponding root mean squared errors (RMSEs) for each of the permitted values of the age range that is selected `DDM::ddm()` as part of its fitting procedure.
 
 ```{r "DDM_sensitivity_estimates_in_plot", echo=TRUE, fig.cap="Sensitivity of point estimates of death registration completeness in Ecuador from 2001-2010 to choice of age-range parameter in the GGB-SEG method", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
@@ -370,7 +368,7 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 
 The sensitivity estimates are also returned in table by `EstimateDDM`, in the `sensitivity_ddm_estimates` element of its list.
 ```{r "DDM_sensitivity_estimates_table"}
-head(ddm_results$sensitivity_ggbseg_estimates, n=5)
+head(ddm_results$sensitivity_ddm_estimates, n=5)
 ```
 
 # Example of National Analysis: Ecuador

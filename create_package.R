@@ -1,5 +1,6 @@
 # Jeremy Roth
 rm(list=ls())
+gc()
 .rs.restartR()
 
 library(devtools)
@@ -13,3 +14,5 @@ install("SubnationalCRVS/") ## installs with "R CMD INSTALL"
 
 .rs.restartR()
 library(SubnationalCRVS)
+
+
