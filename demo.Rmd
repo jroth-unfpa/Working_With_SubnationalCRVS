@@ -1,7 +1,7 @@
 ---
 title: "Working with the `SubnationalCRVS` R Package"
 author: "Created by: Jeremy Roth"
-date: 'Last Updated: 16 July 2020'
+date: 'Last Updated: 21 July 2020'
 output:
   pdf_document:
     number_sections: yes
@@ -10,6 +10,7 @@ bibliography: bibliography.bib
 header-includes:
  \usepackage{float}
 ---
+
 ```{r wrap-hook, echo=FALSE, include=FALSE}
 ## (Solution taken from: https://stackoverflow.com/questions/23114654/knitr-output-hook-with-an-output-lines-option-that-works-like-echo-26)
 library(knitr)
@@ -30,10 +31,10 @@ knit_hooks$set(output = function(x, options) {
 The `SubnationalCRVS` package, which is still under active development, is hosted on the GitHub page `www.github.com/ConVERGE-UNFPA/SubnationalCRVS` rather than on CRAN. As a result, `SubnationalCRVS` cannot be installed with the usual `install.packages()` function. Instead, `SubnationalCRVS` can be installed with the `install_github()` function from the `devtools` package. The key dependency `DemoTools` [@DemoTools] is also hosted on GitHub instead of CRAN and can also be installed with `install_github()`.
 
 ```{r "install_package", eval=FALSE}
-install.packages("devtools")
-library(devtools)
-install_github("timriffe/DemoTools") # install the DemoTools dependency 
-install_github("ConVERGE-UNFPA/SubnationalCRVS") # install the SubnationalCRVS package
+#install.packages("devtools") # install devtools (to be able to use install_github())
+library(devtools) 
+#install_github("timriffe/DemoTools") # install the DemoTools dependency 
+#install_github("ConVERGE-UNFPA/SubnationalCRVS") # install the SubnationalCRVS package
 ```
 Now we can load `SubnationalCRVS`, specify the name of the local folder in which we will save the plots produced by the package, and create that local folder if it does not already exist.
 ```{r "load_package", message=FALSE, warning=FALSE}
