@@ -1,7 +1,7 @@
 ---
 title: "Working with the `SubnationalCRVS` R Package"
 author: "Created by: Jeremy Roth"
-date: 'Last Updated: 21 July 2020'
+date: 'Last Updated: 22 July 2020'
 output:
   pdf_document:
     number_sections: yes
@@ -377,7 +377,7 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 
 ```{r "DDM_RMSE_estimates_in_plot", echo=TRUE, fig.cap="Sensitivity of point estimates of death registration completeness in Ecuador from 2001-2010 to choice of age-range parameter in the GGB-SEG method", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
-                                   "ggbseg_RMSE_province_name_",
+                                   "ggbseg_RMSE_ggb_province_name_",
                                    Sys.Date(),
                                    ".pdf"))
 ```
@@ -446,7 +446,7 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 ```
 ```{r "DDM_RMSE_estimates_in_plot_national", echo=TRUE, fig.cap="Sensitivity of point estimates of death registration completeness in Ecuador from 2001-2010 to choice of age-range parameter in the GGB-SEG method", fig.align="center", fig.pos="H", out.width = "60%", eval=TRUE}
 knitr::include_graphics(path=paste0(my_plots_dir,
-                                   "ggbseg_RMSE_National_",
+                                   "ggbseg_RMSE_ggb_National_",
                                    Sys.Date(),
                                    ".pdf"))
 ```
