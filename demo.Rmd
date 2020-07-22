@@ -222,7 +222,7 @@ knitr::include_graphics(path=paste0(my_plots_dir,
 
 Just as the `PlotSexRatios()` function returns a table of disaggregated sex ratios, `PlotAgeRatios()` returns a table of disaggregated age ratios.
 ```{r "age_ratios_table"}
-a %>% select(province_name, age, pop1, pop2, age_ratio_1, age_ratio_2) %>%
+a %>% select(province_name, age, sex, pop1, pop2, age_ratio_1, age_ratio_2) %>%
       head()
 ```
 
