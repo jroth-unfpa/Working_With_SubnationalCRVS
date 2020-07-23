@@ -23,8 +23,7 @@ data/
 # scripts for debugging/testing
 *debugging*
 
-# output from debugging/testing
-Plots/
+# data files
 Data/
 
 # History files
